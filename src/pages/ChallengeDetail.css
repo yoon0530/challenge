@@ -1,7 +1,7 @@
-/* CourseDetail.css */
+/* ChallengeDetail.css */
 
 /* 전체 컨테이너 스타일 */
-.course-detail {
+.challenge-detail {
   max-width: 600px;
   margin: 40px auto;
   padding: 20px;
@@ -13,7 +13,7 @@
 }
 
 /* 제목 스타일 */
-.course-detail h2 {
+.challenge-detail h2 {
   font-size: 1.8rem;
   margin-bottom: 10px;
   color: #3f51b5;
@@ -21,14 +21,14 @@
 }
 
 /* 텍스트 스타일 */
-.course-detail p {
+.challenge-detail p {
   font-size: 1rem;
   margin: 8px 0;
   line-height: 1.5;
 }
 
 /* 강조 텍스트 */
-.course-detail p strong {
+.challenge-detail p strong {
   color: #333;
   font-weight: bold;
 }
@@ -75,7 +75,7 @@
 
 /* 반응형 처리 */
 @media (max-width: 600px) {
-  .course-detail {
+  .challenge-detail {
       padding: 15px;
   }
 

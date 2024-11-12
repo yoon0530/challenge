@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import './CoursesPage.css';
+import './ChallengesPage.css';
 import host from "../api";
 
-const CoursesPage = () => {
+const ChallengesPage = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const [courseList, setCourseList] = useState([]);
+    const [challengeList, setChallengeList] = useState([]);
     const token = localStorage.getItem('auth-token');
 
-    const fetchCourses = async () => {
+    const fetchChallenges = async () => {
         try {
             const response = await axios.get(`${host}challenge/list`, {
                 headers: {
@@ -20,31 +20,31 @@ const CoursesPage = () => {
             });
 
             if (Array.isArray(response.data.result)) {
-                setCourseList(response.data.result);
+                setChallengeList(response.data.result);
             } else {
                 console.error("Fetched data is not an array:", response.data);
-                setCourseList([]);
+                setChallengeList([]);
             }
         } catch (error) {
-            console.error("Error fetching courses:", error);
-            setCourseList([]);
+            console.error("Error fetching challenges:", error);
+            setChallengeList([]);
         }
     };
 
     useEffect(() => {
-        fetchCourses();
+        fetchChallenges();
     }, []);
 
     useEffect(() => {
         // 새로운 도전이 추가되었을 때만 업데이트
-        if (location.state?.newCourse && !courseList.some(course => course.id === location.state.newCourse.id)) {
-            setCourseList(prevCourses => [location.state.newCourse, ...prevCourses]);
+        if (location.state?.newChallenge && !challengeList.some(challenge => challenge.id === location.state.newChallenge.id)) {
+            setChallengeList(prevChallenges => [location.state.newChallenge, ...prevChallenges]);
         }
 
         // 삭제된 도전이 있을 때만 업데이트
-        if (location.state?.deletedCourseId) {
-            setCourseList(prevCourses =>
-                prevCourses.filter(course => course.id !== location.state.deletedCourseId)
+        if (location.state?.deletedChallengeId) {
+            setChallengeList(prevChallenges =>
+                prevChallenges.filter(challenge => challenge.id !== location.state.deletedChallengeId)
             );
         }
     }, [location.state]);
@@ -54,39 +54,39 @@ const CoursesPage = () => {
     };
 
     const handleCreateChallenge = () => {
-        navigate('/create-course');
+        navigate('/create-challenge');
     };
 
     return (
-        <div className="courses-page">
-            <div className="course">
+        <div className="challenges-page">
+            <div className="challenge">
                 <h1>도전 목록</h1>
                 <button className="create-challenge-button" onClick={handleCreateChallenge}>
                     도전 생성
                 </button>
             </div>
-            <div className="courses-grid">
-                {courseList.map(challenge => (
+            <div className="challenges-grid">
+                {challengeList.map(challenge => (
                     <div
                         key={challenge.challengeId}
-                        className="course-card"
+                        className="challenge-card"
                         onClick={() => handleCardClick(challenge.challengeId)}
                         style={{cursor: 'pointer'}}
                     >
-                        <div className="course-badge">
+                        <div className="challenge-badge">
                             <span>{challenge.status ? "진행 중" : "모집 중"}</span>
                         </div>
-                        <h3 className="course-title">{challenge.description || "도전 제목"}</h3>
-                        <div className="course-dates">
+                        <h3 className="challenge-title">{challenge.description || "도전 제목"}</h3>
+                        <div className="challenge-dates">
                             진행 단계: {challenge.currentStep} / {challenge.totalStep}
                         </div>
-                        <p className="course-description">
+                        <p className="challenge-description">
                             {challenge.description || "도전을 성공하고 보상금을 얻어보세요!"}
                         </p>
-                        <div className="course-details">
+                        <div className="challenge-details">
                             <p>참여 인원: {challenge.userCount} / {challenge.maxHead}</p>
                         </div>
-                        <div className="course-rewards">
+                        <div className="challenge-rewards">
                             <p>보증금</p>
                             <span>{challenge.reward ? `${challenge.reward.toLocaleString()}원` : "보증금 없음"}</span>
                         </div>
@@ -97,4 +97,4 @@ const CoursesPage = () => {
     );
 };
 
-export default CoursesPage;
+export default ChallengesPage;

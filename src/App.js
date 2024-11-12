@@ -16,9 +16,9 @@ import FreeBoard from "./pages/FreeBoard";
 import PostDetail from "./pages/PostDetail";
 import WritePost from "./pages/WritePost";
 import EditPost from "./pages/EditPost";
-import CoursesPage from "./pages/CoursesPage";
-import CourseDetail from "./pages/CourseDetail";
-import CreateCoursePage from "./pages/CreateCoursePage";
+import ChallengesPage from "./pages/ChallengesPage";
+import ChallengeDetail from "./pages/ChallengeDetail";
+import CreateChallengePage from "./pages/CreateChallengePage";
 import MyChallenge from "./pages/MyChallenge";
 import CompletedChallenges from "./pages/CompletedChallenges";
 import InfoEdit from "./pages/InfoEdit";
@@ -33,24 +33,24 @@ function App() {
     const [userName, setUserName] = useState(() => JSON.parse(localStorage.getItem('user'))?.name || '');
     const [isLoggedIn, setIsLoggedIn] = useState(() => localStorage.getItem("isLoggedIn") === "true");
     const [parsed, setParsed] = useState(() => JSON.parse(localStorage.getItem('user')));
-    const [courses, setCourses] = useState([]);
+    const [challenges, setChallenges] = useState([]);
 
     // useEffect는 필요한 데이터를 가져오는 데만 사용
     useEffect(() => {
-        const fetchCourses = async () => {
+        const fetchChallenges = async () => {
             try {
                 const response = await axios.get(`${host}challenge/list`, {
                     headers: {
                         'Content-Type': 'application/json',
                     }
                 });
-                setCourses(response.data);
+                setChallenges(response.data);
             } catch (error) {
-                console.error("Error fetching courses data:", error);
+                console.error("Error fetching challenges data:", error);
             }
         };
 
-        fetchCourses();
+        fetchChallenges();
     }, []);
 
     const handleLogin = (user) => {
@@ -79,9 +79,9 @@ function App() {
                     <Route path="/" element={<><HomePage /><Footer className={styles.footer} /></>} />
                     <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
                     <Route path="/signup" element={<><SignupPage /><Footer className={styles.footer} /></>} />
-                    <Route path="/course" element={<CoursesPage courses={courses} />} />
-                    <Route path="/course/:challengeId" element={<CourseDetail />} />
-                    <Route path="/create-course" element={<CreateCoursePage />} />
+                    <Route path="/challenge" element={<ChallengesPage challenges={challenges} />} />
+                    <Route path="/challenge/:challengeId" element={<ChallengeDetail />} />
+                    <Route path="/create-challenge" element={<CreateChallengePage />} />
                     <Route path="/my-challenge" element={<MyChallenge />} />
                     <Route path="/review" element={<Review />} />
                     

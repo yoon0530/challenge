@@ -21,7 +21,7 @@ function Nav({ isLoggedIn, onLogout }) {
                 {!isLoggedIn ? (
                      <>
                     <li>
-                        <NavLink style={getLinkStyle} to="/course">
+                        <NavLink style={getLinkStyle} to="/challenge">
                             도전
                         </NavLink>
                     </li>
@@ -34,7 +34,7 @@ function Nav({ isLoggedIn, onLogout }) {
                     ) : (
                         <>
                         <li>
-                            <NavLink style={getLinkStyle} to="/course">
+                            <NavLink style={getLinkStyle} to="/challenge">
                             도전
                             </NavLink>
                         </li>

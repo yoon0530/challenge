@@ -1,0 +1,36 @@
+.create-challenge-page {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.create-challenge-form label {
+    display: block;
+    margin: 10px 0;
+}
+
+.create-challenge-form input,
+.create-challenge-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    box-sizing: border-box;
+}
+
+.create-challenge-form button {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #3f51b5;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.create-challenge-form button:hover {
+    background-color: #303f9f;
+}
+
+.title{
+    text-align: center;
+}

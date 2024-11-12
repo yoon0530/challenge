@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import './CreateChallengePage.css'
 
 const CompletedChallenges = () => {
     const [completedChallenges, setCompletedChallenges] = useState([]);
@@ -16,7 +17,7 @@ const CompletedChallenges = () => {
                     return;
                 }
 
-                const response = await axios.get('http://localhost:5000/course');
+                const response = await axios.get('http://localhost:5000/challenge');
 
                 // status가 "종료됨"이고 사용자가 신청했던 도전들만 필터링
                 const completed = response.data.filter(
