@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import './ChallengesPage.css';
-import host from "../api";
+import host from "../../api";
 
 const ChallengesPage = () => {
     const navigate = useNavigate();

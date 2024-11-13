@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './InfoEdit.css';
-import host from "../api";
+import host from "../../api";
 
 const InfoEdit = () => {
   const [userInfo, setUserInfo] = useState({

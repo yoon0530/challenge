@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, Outlet, useLocation } from 'react-router-dom';
 import './MyPage.css';
 import axios from 'axios';
-import host from "../api";
+import host from "../../api";
 
 function Mypage({ onLogout }) {
     const [recentlyViewed, setRecentlyViewed] = useState([]);
@@ -99,7 +99,7 @@ function Mypage({ onLogout }) {
                             <button onClick={()=>navigate('/mypage/myinfo')}>내 정보</button>
                             <button onClick={() => setShowRecentlyViewed(!showRecentlyViewed)}>최근 본 도전</button>
                             <button>성공한 챌린지 내역</button>
-                            <button onClick={() => navigate('/mypage/pointhistory')}>포인트 내역 확인</button>
+                            <button onClick={() => navigate('/mypage/mypoint')}>포인트 관리</button>
                             <button onClick={() => navigate('/mypage/helpCenter')}>1:1 문의</button>
                             <button onClick={handleDeleteProfile}>회원탈퇴</button>
                         </div>
@@ -127,22 +127,6 @@ function Mypage({ onLogout }) {
                     </div>
                 </div>
             </div>
-
-            {/* 최근 본 도전 목록 표시 */}
-            {showRecentlyViewed && (
-                <div className="recentlyViewed">
-                    <h3> 최근 본 도전 목록 </h3>
-                    {recentlyViewed.length > 0 ? (
-                        recentlyViewed.map((challenge) => (
-                            <div key={challenge.id}>
-                                <p>{challenge.title}</p>
-                            </div>
-                        ))
-                    ) : (
-                        <p>최근 본 도전이 없습니다.</p>
-                    )}
-                </div>
-            )}
         </div>
     );
 }

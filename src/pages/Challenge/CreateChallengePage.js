@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import host from "../api";
+import host from "../../api";
 
 const CreateChallengePage = () => {
     const navigate = useNavigate();

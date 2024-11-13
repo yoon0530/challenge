@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import host from "../api";
+import host from "../../api";
 import './MyInfo.css';
 import { useNavigate } from "react-router-dom";
 

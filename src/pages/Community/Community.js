@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import './Community.css';
 import axios from 'axios';
-import host from "../api";
+import host from "../../api";
 
 const Community = () => {
     const [posts, setPosts] = useState([]);

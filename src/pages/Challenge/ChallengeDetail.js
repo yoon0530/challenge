@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './ChallengeDetail.css';
-import host from "../api";
+import host from "../../api";
 
 const ChallengeDetail = () => {
     const { challengeId } = useParams();

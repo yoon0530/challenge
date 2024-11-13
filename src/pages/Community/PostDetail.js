@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './PostDetail.css';
-import host from "../api";
+import host from "../../api";
 
 const PostDetail = ({ userName }) => {
     const { id } = useParams();
@@ -81,7 +81,6 @@ const PostDetail = ({ userName }) => {
             setNewComment('');
             window.location.reload()
         } catch (error) {
-            console.error("Error adding comment:", error);
             alert("댓글 추가에 실패했습니다.");
         }
     };

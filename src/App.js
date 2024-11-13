@@ -7,26 +7,28 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
-import MyPage from "./pages/MyPage";
-import PointHistory from "./pages/PointHistory";
-import PointExchange from "./pages/PointExchange";
-import PointRecharge from "./pages/PointRecharge";
+import MyPage from "./pages/MyPage/MyPage";
+import PointHistory from "./pages/MyPage/PointHistory";
+import PointExchange from "./pages/MyPage/PointExchange";
+import PointRecharge from "./pages/MyPage/PointRecharge";
 import PrivateRoute from "./components/PrivateRoute";
-import Community from "./pages/Community";
-import PostDetail from "./pages/PostDetail";
-import WritePost from "./pages/WritePost";
-import EditPost from "./pages/EditPost";
-import ChallengesPage from "./pages/ChallengesPage";
-import ChallengeDetail from "./pages/ChallengeDetail";
-import CreateChallengePage from "./pages/CreateChallengePage";
-import MyChallenge from "./pages/MyChallenge";
-import CompletedChallenges from "./pages/CompletedChallenges";
-import InfoEdit from "./pages/InfoEdit";
+import Community from "./pages/Community/Community";
+import PostDetail from "./pages/Community/PostDetail";
+import WritePost from "./pages/Community/WritePost";
+import EditPost from "./pages/Community/EditPost";
+import ChallengesPage from "./pages/Challenge/ChallengesPage";
+import ChallengeDetail from "./pages/Challenge/ChallengeDetail";
+import CreateChallengePage from "./pages/Challenge/CreateChallengePage";
+import MyChallenge from "./pages/Challenge/MyChallenge";
+import CompletedChallenges from "./pages/Challenge/CompletedChallenges";
+import InfoEdit from "./pages/MyPage/InfoEdit";
 import HelpCenter from "./pages/HelpCenter";
 import HelpPost from "./pages/HelpPost";
 import Review from "./pages/Review";
-import MyInfo from "./pages/MyInfo";
+import MyInfo from "./pages/MyPage/MyInfo";
 import host from "./api";
+import MyPoint from "./pages/MyPage/MyPoint";
+import Account from "./pages/MyPage/Account";
 
 function App() {
     const [userName, setUserName] = useState(() => JSON.parse(localStorage.getItem('user'))?.name || '');
@@ -92,9 +94,11 @@ function App() {
                    
                     {/* 마이페이지와 관련된 보호된 경로 */}
                     <Route path="/mypage" element={<PrivateRoute isLoggedIn={isLoggedIn}><MyPage parsed={parsed} onLogout={() => handleLogout(false)} /></PrivateRoute>}>
+                        <Route path="mypoint" element={<MyPoint />} />
                         <Route path="pointhistory" element={<PointHistory />} />
                         <Route path="pointexchange" element={<PointExchange />} />
                         <Route path="pointrecharge" element={<PointRecharge />} />
+                        <Route path="account" element={<Account />} />
                         <Route path="myinfo" element={<MyInfo />} />
                         <Route path="infoEdit" element={<InfoEdit />}/>
                         <Route path="helpCenter" element={<HelpCenter />} />

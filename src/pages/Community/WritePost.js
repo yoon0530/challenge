@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './WritePost.css';
-import host from "../api";
-import styles from "./PointRecharge.module.css";
+import host from "../../api";
+import styles from "../MyPage/PointRecharge.module.css";
 
 const WritePost = ({ userName }) => {
     const [title, setTitle] = useState('');
