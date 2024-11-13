@@ -14,7 +14,9 @@ const ChallengeDetail = () => {
     const [isEnrolled, setIsEnrolled] = useState(false);
     const storedUser = JSON.parse(localStorage.getItem('user'));
     const token = localStorage.getItem('auth-token');
+
     const [challenge, setChallenge] = useState({
+        id: '',
         createdAt: '',
         description: '',
         endDate: '',
@@ -34,11 +36,6 @@ const ChallengeDetail = () => {
                     },
                 });
                 setChallenge(response.data.result[0]);
-
-                if (storedUser) {
-                    setIsAuthor(response.data.authorId === storedUser.id);
-                    setIsEnrolled(response.data.enrolledUsers?.includes(storedUser.id) || false);
-                }
             } catch (error) {
                 console.error("Error fetching challenge details:", error);
             } finally {
@@ -59,7 +56,6 @@ const ChallengeDetail = () => {
                     }
                 });
                 alert("도전이 삭제되었습니다.");
-                navigate('/challenge', { state: { deletedChallengeId: challengeId } });
             } catch (error) {
                 console.error("Error deleting challenge:", error);
                 alert("도전 삭제에 실패했습니다.");
@@ -67,6 +63,9 @@ const ChallengeDetail = () => {
         }
     };
 
+    const handleEdit = () => {
+        navigate(`/editchallenge/${challenge.id}`);
+    }
     const handleEnroll = async () => {
         if (!storedUser) {
             alert("로그인이 필요합니다.");
@@ -108,6 +107,7 @@ const ChallengeDetail = () => {
                 <button onClick={handleDelete} className="delete-button">삭제</button>
             )}
             <button onClick={handleEnroll} className="enroll-button">신청</button>
+            <button onClick={handleEdit}>수정</button>
         </div>
     );
 };

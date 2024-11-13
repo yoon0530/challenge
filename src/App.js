@@ -29,6 +29,7 @@ import MyInfo from "./pages/MyPage/MyInfo";
 import host from "./api";
 import MyPoint from "./pages/MyPage/MyPoint";
 import Account from "./pages/MyPage/Account";
+import EditChallenge from "./pages/Challenge/EditChallenge";
 
 function App() {
     const [userName, setUserName] = useState(() => JSON.parse(localStorage.getItem('user'))?.name || '');
@@ -82,6 +83,7 @@ function App() {
                     <Route path="/signup" element={<><SignupPage /><Footer className={styles.footer} /></>} />
                     <Route path="/challenge" element={<ChallengesPage challenges={challenges} />} />
                     <Route path="/challenge/:challengeId" element={<ChallengeDetail />} />
+                    <Route path="/editchallenge/:challengeId" element={<EditChallenge />} />
                     <Route path="/create-challenge" element={<CreateChallengePage />} />
                     <Route path="/my-challenge" element={<MyChallenge />} />
                     <Route path="/review" element={<Review />} />
