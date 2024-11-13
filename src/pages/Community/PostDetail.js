@@ -48,7 +48,8 @@ const PostDetail = ({ userName }) => {
                     author: res.nickName,
                     content: res.content,
                     createdAt: res.createdAt,
-                    votes: res.votes
+                    votes: res.votes,
+                    userId: res.userId,
                 }));
                 setComments(mappedComments);
             } catch (error) {
@@ -165,7 +166,7 @@ const PostDetail = ({ userName }) => {
                         <p>{comment.content}</p>
                         <p>추천수: {comment.votes}</p>
                         <p>작성일: {comment.createdAt}</p>
-                        {storedUser?.nickName === comment.author && (
+                        {storedUser?.userId === comment.userId && (
                             <button onClick={() => handleDeleteComment(comment.id)} className="delete-comment-button">
                                 댓글 삭제
                             </button>

@@ -26,10 +26,6 @@ const LoginPage = ({ onLogin }) => {
             const response = await axios.post(`${host}auth/signin`, loginInfo, {
                 headers: {
                     'Content-Type': 'application/json',
-                },
-                data:{
-                    email:loginInfo.email,
-                    password:loginInfo.password,
                 }
             });
 
