@@ -22,16 +22,16 @@ h1 {
 
 .post-table th, .post-table td {
     padding: 12px;
-    text-align: left;
     border-bottom: 1px solid #ddd; /* 가로선만 보이도록 설정 */
 }
 
 .post-table th {
     font-weight: bold;
+    text-align: left;
 }
 
 .post-table th:first-child, .post-table td:first-child {
-    text-align: center;
+    text-align: left;
     width: 10%;
 }
 
@@ -39,8 +39,16 @@ h1 {
     cursor: pointer;
 }
 
+.post-table .createdAt {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    width: auto;
+}
 .post-table .author {
-    text-align: right; /* 작성자를 오른쪽으로 정렬 */
+    text-align: right;
+    padding: 0;
+    margin: 0;
 }
 
 .post-row:hover td:nth-child(2) {

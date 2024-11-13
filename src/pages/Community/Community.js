@@ -15,14 +15,18 @@ const Community = () => {
         const fetchPosts = async () => {
             try {
                 const response = await axios.get(`${host}community/list/${currentPage}`);
-                const mappedPosts = response.data.result.map(post => ({
-                    id: post.pid,
-                    title: post.title,
-                    author: post.nickName,
-                    createdAt: post.createdAt,
-                    views: post.views,
-                    votes: post.votes,
-                }));
+                const mappedPosts = response.data.result.map(post => {
+                    const date = new Date(post.createdAt);
+                    const formattedDate = `${date.getMonth() + 1}.${date.getDate()}`;
+                    return {
+                        id: post.pid,
+                        title: post.title,
+                        author: post.nickName,
+                        createdAt: formattedDate,
+                        views: post.views,
+                        votes: post.votes,
+                    };
+                });
                 setPosts(mappedPosts);
                 setTotalPages(response.data.totalPages || 0);
             } catch (error) {
@@ -42,6 +46,7 @@ const Community = () => {
                     <tr>
                         <th>번호</th>
                         <th>제목</th>
+                        <th className="createdAt">작성일</th>
                         <th className="author">작성자</th>
                     </tr>
                 </thead>
@@ -55,6 +60,7 @@ const Community = () => {
                             >
                                 <td>{(currentPage - 1) * postsPerPage + index + 1}</td>
                                 <td>{post.title}</td>
+                                <td className="createdAt">{post.createdAt}</td>
                                 <td className="author">{post.author}</td>
                             </tr>
                         ))
