@@ -35,19 +35,7 @@ const ChallengesPage = () => {
         fetchChallenges();
     }, []);
 
-    useEffect(() => {
-        // 새로운 도전이 추가되었을 때만 업데이트
-        if (location.state?.newChallenge && !challengeList.some(challenge => challenge.id === location.state.newChallenge.id)) {
-            setChallengeList(prevChallenges => [location.state.newChallenge, ...prevChallenges]);
-        }
 
-        // 삭제된 도전이 있을 때만 업데이트
-        if (location.state?.deletedChallengeId) {
-            setChallengeList(prevChallenges =>
-                prevChallenges.filter(challenge => challenge.id !== location.state.deletedChallengeId)
-            );
-        }
-    }, [location.state]);
 
     const handleCardClick = (challengeId) => {
         navigate(`/challenge/${challengeId}`);
@@ -70,7 +58,7 @@ const ChallengesPage = () => {
                     <div
                         key={challenge.challengeId}
                         className="challenge-card"
-                        onClick={() => handleCardClick(challenge.challengeId)}
+                            onClick={() => handleCardClick(challenge.challengeId)}
                         style={{cursor: 'pointer'}}
                     >
                         <div className="challenge-badge">
