@@ -5,9 +5,7 @@ import axios from 'axios';
 import host from "../../api";
 
 function Mypage({ onLogout }) {
-    const [recentlyViewed, setRecentlyViewed] = useState([]);
     const [showRecentlyViewed, setShowRecentlyViewed] = useState(false);
-    const [inProgressChallenges, setInProgressChallenges] = useState([]); // 진행 중인 내가 신청한 도전 목록
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -114,15 +112,7 @@ function Mypage({ onLogout }) {
                             </Link>
                         </div>
                         <div className="inProgressChallenges">
-                            {inProgressChallenges.length > 0 ? (
-                                inProgressChallenges.map((challenge) => (
-                                    <div key={challenge.id} className="challengeItem">
-                                        <p>{challenge.title}</p>
-                                    </div>
-                                ))
-                            ) : (
-                                <p>현재 내가 신청한 진행 중인 도전이 없습니다.</p>
-                            )}
+                            <Outlet/>
                         </div>
                     </div>
                 </div>
