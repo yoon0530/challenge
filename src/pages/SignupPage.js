@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { SIGNUP_LIST, AGREE_LIST } from './Signup/SignupData';
 import { AiOutlineCheckCircle } from 'react-icons/ai';
 import axios from 'axios';
-import './Signup.css';
+import './SignupPage.css';
 import host from "../api";
 
 const SignupPage = () => {

@@ -12,7 +12,7 @@ import PointHistory from "./pages/PointHistory";
 import PointExchange from "./pages/PointExchange";
 import PointRecharge from "./pages/PointRecharge";
 import PrivateRoute from "./components/PrivateRoute";
-import FreeBoard from "./pages/FreeBoard";
+import Community from "./pages/Community";
 import PostDetail from "./pages/PostDetail";
 import WritePost from "./pages/WritePost";
 import EditPost from "./pages/EditPost";
@@ -29,7 +29,6 @@ import MyInfo from "./pages/MyInfo";
 import host from "./api";
 
 function App() {
-    // 초기값을 localStorage에서 직접 가져와 설정
     const [userName, setUserName] = useState(() => JSON.parse(localStorage.getItem('user'))?.name || '');
     const [isLoggedIn, setIsLoggedIn] = useState(() => localStorage.getItem("isLoggedIn") === "true");
     const [parsed, setParsed] = useState(() => JSON.parse(localStorage.getItem('user')));
@@ -86,9 +85,9 @@ function App() {
                     <Route path="/review" element={<Review />} />
                     
                     {/* 보호된 라우트 설정 */}
-                    <Route path="/freeboard" element={<PrivateRoute isLoggedIn={isLoggedIn}><FreeBoard /></PrivateRoute>} />
+                    <Route path="/community" element={<PrivateRoute isLoggedIn={isLoggedIn}><Community /></PrivateRoute>} />
                     <Route path="/write" element={<PrivateRoute isLoggedIn={isLoggedIn}><WritePost userName={userName} /></PrivateRoute>} />
-                    <Route path="/post/:id" element={<PrivateRoute isLoggedIn={isLoggedIn}><PostDetail userName={userName} /></PrivateRoute>} />
+                    <Route path="/community/:id" element={<PrivateRoute isLoggedIn={isLoggedIn}><PostDetail userName={userName} /></PrivateRoute>} />
                     <Route path="/edit/:id" element={<PrivateRoute isLoggedIn={isLoggedIn}><EditPost /></PrivateRoute>} />
                    
                     {/* 마이페이지와 관련된 보호된 경로 */}

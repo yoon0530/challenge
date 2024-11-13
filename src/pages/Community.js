@@ -1,36 +1,42 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './FreeBoard.css';
+import {useNavigate, useParams} from 'react-router-dom';
+import './Community.css';
 import axios from 'axios';
+import host from "../api";
 
-const FreeBoard = () => {
+const Community = () => {
     const [posts, setPosts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const postsPerPage = 5;
+    const [totalPages, setTotalPages] = useState();
+    const postsPerPage = 10;
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/posts');
-                setPosts(response.data);
+                const response = await axios.get(`${host}community/list/${currentPage}`);
+                const mappedPosts = response.data.result.map(post => ({
+                    id: post.pid,
+                    title: post.title,
+                    author: post.nickName,
+                    createdAt: post.createdAt,
+                    views: post.views,
+                    votes: post.votes,
+                }));
+                setPosts(mappedPosts);
+                setTotalPages(response.data.totalPages || 0);
             } catch (error) {
                 console.error("데이터를 가져오는 중 오류 발생:", error);
             }
         };
-
         fetchPosts();
-    }, []);
-
-    const indexOfLastPost = currentPage * postsPerPage;
-    const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+    }, [currentPage]);
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     return (
         <div className="board-container">
-            <h1>notice</h1>
+            <h1>자유게시판</h1>
             <table className="post-table">
                 <thead>
                     <tr>
@@ -40,14 +46,14 @@ const FreeBoard = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {currentPosts.length > 0 ? (
-                        currentPosts.map((post, index) => (
+                    {posts.length > 0 ? (
+                        posts.map((post, index) => (
                             <tr 
-                                key={post.id} 
-                                onClick={() => navigate(`/post/${post.id}`)}
+                                key={post.id}
+                                    onClick={() => navigate(`/community/${post.id}`)}
                                 className="post-row"
                             >
-                                <td>{indexOfFirstPost + index + 1}</td>
+                                <td>{(currentPage - 1) * postsPerPage + index + 1}</td>
                                 <td>{post.title}</td>
                                 <td className="author">{post.author}</td>
                             </tr>
@@ -60,7 +66,7 @@ const FreeBoard = () => {
                 </tbody>
             </table>
             <div className="pagination">
-                {[...Array(Math.ceil(posts.length / postsPerPage)).keys()].map(num => (
+                {[...Array(totalPages).keys()].map(num => (
                     <button 
                         key={num} 
                         onClick={() => paginate(num + 1)} 
@@ -75,4 +81,4 @@ const FreeBoard = () => {
     );
 };
 
-export default FreeBoard;
+export default Community;

@@ -13,28 +13,6 @@ function Mypage({ onLogout }) {
 
     const userId = JSON.parse(localStorage.getItem('user'));
 
-    /*useEffect(() => {
-        const fetchInProgressChallenges = async () => {
-            try {
-                const response = await axios.get(`${host}auth/`); // 전체 도전 목록 가져오기
-
-                if (userId) {
-                    // 현재 진행 중이며 내가 신청한 도전만 필터링
-                    const enrolledChallenges = response.data.filter(
-                        challenge =>
-                            challenge.status === '진행 중' &&
-                            challenge.enrolledUsers?.includes(userId)
-                    );
-                    setInProgressChallenges(enrolledChallenges);
-                }
-            } catch (error) {
-                console.error("진행 중인 도전을 불러오는 중 오류 발생:", error);
-            }
-        };
-
-        fetchInProgressChallenges();
-    }, [userId]);*/
-
     const handleDeleteProfile = async (e) => {
         e.preventDefault();
         console.log("Deleting user with ID:", userId);

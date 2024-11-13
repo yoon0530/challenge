@@ -7,14 +7,22 @@ import host from "../api";
 
 const ChallengeDetail = () => {
     const { challengeId } = useParams();
-    const [challenge, setChallenge] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [status, setStatus] = useState(""); // 상태를 저장할 state 추가
+    const [status, setStatus] = useState("");
     const navigate = useNavigate();
     const [isAuthor, setIsAuthor] = useState(false);
     const [isEnrolled, setIsEnrolled] = useState(false);
     const storedUser = JSON.parse(localStorage.getItem('user'));
     const token = localStorage.getItem('auth-token');
+    const [challenge, setChallenge] = useState({
+        createdAt: '',
+        description: '',
+        endDate: '',
+        maxHead: '',
+        participationFee: '',
+        startDate: '',
+        totalStep: '',
+    });
 
     useEffect(() => {
         const fetchChallenge = async () => {
@@ -25,7 +33,7 @@ const ChallengeDetail = () => {
                         'auth-token': token,
                     },
                 });
-                setChallenge(response.data);
+                setChallenge(response.data.result[0]);
 
                 if (storedUser) {
                     setIsAuthor(response.data.authorId === storedUser.id);
@@ -44,7 +52,12 @@ const ChallengeDetail = () => {
     const handleDelete = async () => {
         if (window.confirm("정말로 이 도전을 삭제하시겠습니까?")) {
             try {
-                await axios.delete(`${host}challenge/`);
+                await axios.delete(`${host}challenge/${challengeId}`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'auth-token': token,
+                    }
+                });
                 alert("도전이 삭제되었습니다.");
                 navigate('/challenge', { state: { deletedChallengeId: challengeId } });
             } catch (error) {
@@ -55,15 +68,22 @@ const ChallengeDetail = () => {
     };
 
     const handleEnroll = async () => {
-        const loggedInUser = JSON.parse(localStorage.getItem('user'));
-        if (!loggedInUser) {
+        if (!storedUser) {
             alert("로그인이 필요합니다.");
             return;
         }
 
         try {
-            await axios.patch(`http://localhost:5000/challenge/`, {
-                enrolledUsers: [...(challenge.enrolledUsers || []), loggedInUser.id]
+            await axios.post(`${host}challenge/join`, {
+                challengeId,
+                stepId: '',
+                contents: '',
+                imageDir: '',
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'auth-token': token,
+                }
             });
             alert("도전에 성공적으로 신청되었습니다.");
             setIsEnrolled(true);
@@ -74,27 +94,20 @@ const ChallengeDetail = () => {
     };
 
     if (loading) return <p>Loading...</p>;
-    if (!challenge) return <p>해당 강의를 찾을 수 없습니다.</p>;
+    if (!challenge) return <p>해당 도전을 찾을 수 없습니다.</p>;
 
     return (
         <div className="challenge-detail">
-            <h2>{challenge.title}</h2>
-            <p><strong> 유형:</strong> {challenge.type}</p>
-            <p><strong>진행률:</strong> {challenge.progress}</p>
-            <p><strong>기간:</strong> {challenge.startDate} - {challenge.endDate}</p>
-            <p><strong>카테고리:</strong> {challenge.category}</p>
-            <p><strong>설명:</strong> {challenge.description}</p>
-            <p><strong>현재 상태:</strong></p> {/* 상태 표시 */}
+            <h2>{challenge.description}</h2>
+            <p><strong>참가비:</strong> {challenge.participationFee}</p>
+            <p><strong>참여 인원:</strong> {challenge.maxHead}</p>
+            <p><strong>진행 상태:</strong> {status}</p>
+            <p><strong>도전 기간:</strong> {challenge.startDate} - {challenge.endDate}</p>
+            <p><strong>현재 단계:</strong> {challenge.totalStep}</p>
             {isAuthor && (
                 <button onClick={handleDelete} className="delete-button">삭제</button>
             )}
-            <button
-                onClick={handleEnroll}
-                className="enroll-button"
-                disabled={isEnrolled || status !== "대기 중"} // 대기 중이 아닐 때 비활성화
-            >
-                {isEnrolled ? "신청 완료" : (status === "대기 중" ? "신청" : "신청 불가")}
-            </button>
+            <button onClick={handleEnroll} className="enroll-button">신청</button>
         </div>
     );
 };

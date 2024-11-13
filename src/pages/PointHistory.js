@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './PointHistory.css'; // CSS 파일 사용
+import './PointHistory.css';
+import host from "../api"; // CSS 파일 사용
 
 const PointHistory = () => {
     const [points, setPoints] = useState([]);
+    const token = localStorage.getItem('auth-token');
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/points');
+                const response = await axios.get(`${host}finance/bankhistory`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'auth-token': token,
+                    }
+                });
                 setPoints(response.data);
             } catch (error) {
                 console.error('데이터를 가져오는 데 오류가 발생했습니다:', error);

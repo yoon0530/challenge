@@ -2,23 +2,33 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './WritePost.css';
+import host from "../api";
+import styles from "./PointRecharge.module.css";
 
 const WritePost = ({ userName }) => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+    const [rank, setRank] = useState();
+    const [type, setType] = useState();
     const navigate = useNavigate();
+    const token = localStorage.getItem('auth-token');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (title && content) {
             try {
-                // 서버로 제목, 내용, 작성자 정보 전송
-                await axios.post('http://localhost:5000/posts', {
-                    title,
-                    content,
-                    author: userName || 'Anonymous',  // userName이 null일 경우 기본값 사용
+                await axios.post(`${host}community/`, {
+                    title: title,
+                    content: content,
+                    rank: rank,
+                    type: type
+                },{
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'auth-token': token,
+                    },
                 });
-                navigate('/freeboard'); // 글 작성 후 자유게시판으로 이동
+                navigate('/community');
             } catch (error) {
                 console.error("Error posting data:", error);
             }
@@ -48,6 +58,22 @@ const WritePost = ({ userName }) => {
                         required
                     />
                 </div>
+                <select
+                    value={rank}
+                    onChange={(e) => setRank(e.target.value)}
+                    className={styles.select}
+                >
+                    <option value="">계좌 선택</option>
+                    <option value="0">이거 골라</option>
+                </select>
+                <select
+                    value={type}
+                    onChange={(e) => setType(e.target.value)}
+                    className={styles.select}
+                >
+                    <option value="">계좌 선택</option>
+                    <option value="1">이거 골라</option>
+                </select>
                 <button type="submit">작성 완료</button>
             </form>
         </div>

@@ -39,7 +39,7 @@ function Nav({ isLoggedIn, onLogout }) {
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink style={getLinkStyle} to="/freeboard">
+                            <NavLink style={getLinkStyle} to="/community">
                             게시판
                             </NavLink>
                         </li>
