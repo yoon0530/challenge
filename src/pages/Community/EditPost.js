@@ -1,48 +1,47 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import './EditPost.css';
+import './WritePost.css';
+import host from "../../api";
 
 const EditPost = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
-    const [author, setAuthor] = useState(''); // 작성자 정보 상태 추가
-    const navigate = useNavigate();
+    const token = localStorage.getItem('auth-token');
 
-    useEffect(() => {
-        const fetchPost = async () => {
-            try {
-                const response = await axios.get(`http://localhost:5000/posts/${id}`);
-                setTitle(response.data.title);
-                setContent(response.data.content);
-                setAuthor(response.data.author); // 작성자 정보 설정
-            } catch (error) {
-                console.error("Error fetching post for editing:", error);
-            }
-        };
-
-        fetchPost();
-    }, [id]);
-
-    const handleUpdate = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            await axios.put(`http://localhost:5000/posts/${id}`, {
-                title,
-                content,
-                author, // 작성자 정보 포함하여 전송
-            });
-            navigate(`/post/${id}`, { replace: true });
-        } catch (error) {
-            console.error("Error updating post:", error);
+
+        if (title && content) {
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
+
+            try {
+                await axios.put(`${host}community/`, {
+                    ...data,
+                    id: id,
+                }, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'auth-token': token,
+                    }
+                });
+                alert("글이 성공적으로 수정되었습니다.");
+                navigate('/community');
+            } catch (error) {
+                console.error("Error posting data:", error);
+            }
+        } else {  // 제목과 내용이 없을 경우 경고 메시지 출력
+            alert('제목과 내용을 모두 입력해주세요.');
         }
     };
 
     return (
-        <div className="edit-post-container">
+        <div className="write-post-container">
             <h2>글 수정</h2>
-            <form onSubmit={handleUpdate}>
+            <form onSubmit={handleSubmit}>
                 <div>
                     <label>제목</label>
                     <input
@@ -60,7 +59,7 @@ const EditPost = () => {
                         required
                     />
                 </div>
-                <button type="submit">수정 완료</button>
+                <button type="submit">작성 완료</button>
             </form>
         </div>
     );

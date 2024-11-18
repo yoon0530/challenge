@@ -19,40 +19,53 @@ function Nav({ isLoggedIn, onLogout }) {
                 </Link>
                 <ul className={styles.menu}>
                 {!isLoggedIn ? (
-                     <>
-                    <li>
-                        <NavLink style={getLinkStyle} to="/challenge">
-                            도전
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink style={getLinkStyle} to="/freeboard">
-                            게시판
-                        </NavLink>
-                    </li>
-                    </>
-                    ) : (
-                        <>
+                    <>
                         <li>
                             <NavLink style={getLinkStyle} to="/challenge">
-                            도전
+                                도전
                             </NavLink>
                         </li>
                         <li>
                             <NavLink style={getLinkStyle} to="/community">
-                            게시판
+                                게시판
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink style={getLinkStyle} to = "/mypage">
-                            마이페이지
+                            <NavLink style={getLinkStyle} to="/review">
+                                후기
                             </NavLink>
                         </li>
-                        
-                        </>
-                    )}
+                    </>
+                ) : (
+                    <>
+                        <li>
+                            <NavLink style={getLinkStyle} to="/challenge">
+                                도전
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink style={getLinkStyle} to="/community">
+                                게시판
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink style={getLinkStyle} to="/review">
+                                후기
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/adminpage" style={getLinkStyle}>관리자페이지</NavLink>
+                        </li>
+                        <li>
+                            <NavLink style={getLinkStyle} to="/mypage">
+                                마이페이지
+                            </NavLink>
+                        </li>
+
+                    </>
+                )}
                     <li>
-                        <UserMenu isLoggedIn={isLoggedIn} onLogout={onLogout} />
+                        <UserMenu isLoggedIn={isLoggedIn} onLogout={onLogout}/>
                     </li>
                 </ul>
             </Container>

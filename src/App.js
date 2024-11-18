@@ -30,6 +30,13 @@ import host from "./api";
 import MyPoint from "./pages/MyPage/MyPoint";
 import Account from "./pages/MyPage/Account";
 import EditChallenge from "./pages/Challenge/EditChallenge";
+import AdminPage from "./pages/AdminPage/AdminPage";
+import QandA from "./pages/AdminPage/QandA";
+import AdminPoint from "./pages/AdminPage/AdminPoint";
+import Exchange from "./pages/AdminPage/Exchange";
+import Capproval from "./pages/AdminPage/Capproval";
+import AdminNav from "./pages/AdminPage/AdminNav";
+import Recharge from "./pages/AdminPage/Recharge";
 
 function App() {
     const [userName, setUserName] = useState(() => JSON.parse(localStorage.getItem('user'))?.name || '');
@@ -37,7 +44,6 @@ function App() {
     const [parsed, setParsed] = useState(() => JSON.parse(localStorage.getItem('user')));
     const [challenges, setChallenges] = useState([]);
 
-    // useEffect는 필요한 데이터를 가져오는 데만 사용
     useEffect(() => {
         const fetchChallenges = async () => {
             try {
@@ -87,7 +93,16 @@ function App() {
                     <Route path="/create-challenge" element={<CreateChallengePage />} />
                     <Route path="/my-challenge" element={<MyChallenge />} />
                     <Route path="/review" element={<Review />} />
-                    
+
+                    <Route path="/adminpage" element={<PrivateRoute isLoggedIn={isLoggedIn}><AdminPage /></PrivateRoute>}>
+                        <Route path="qanda" element={<QandA />} />
+                        <Route path="adminpoint" element={<AdminPoint />}/>
+                        <Route path="exchange" element={<Exchange />}/>
+                        <Route path="recharge" element={<Recharge />}/>
+                        <Route path="capproval" element={<Capproval/>} />
+                        <Route path="adminnav" element={<AdminNav/>}/>
+                    </Route>
+
                     {/* 보호된 라우트 설정 */}
                     <Route path="/community" element={<PrivateRoute isLoggedIn={isLoggedIn}><Community /></PrivateRoute>} />
                     <Route path="/write" element={<PrivateRoute isLoggedIn={isLoggedIn}><WritePost userName={userName} /></PrivateRoute>} />

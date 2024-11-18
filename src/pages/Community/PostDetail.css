@@ -71,3 +71,36 @@
     padding: 8px 16px;
     cursor: pointer;
 }
+
+
+.comment {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    padding: 30px;
+    width: 600%;
+    margin: 0 auto;
+}
+
+.comment > li {
+    margin-top: 20px;
+}
+.comment > li:nth-child(1) {
+    margin: 0px;
+}
+
+.comment-form > form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.comment-form > form > h4 {
+    width: 100%;
+    margin: 14px 0 14px 0;
+}
+
+.ps_box {
+    display: block;
+}

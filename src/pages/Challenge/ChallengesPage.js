@@ -10,6 +10,7 @@ const ChallengesPage = () => {
     const [challengeList, setChallengeList] = useState([]);
     const token = localStorage.getItem('auth-token');
 
+    useEffect(() => {
     const fetchChallenges = async () => {
         try {
             const response = await axios.get(`${host}challenge/list`, {
@@ -31,7 +32,6 @@ const ChallengesPage = () => {
         }
     };
 
-    useEffect(() => {
         fetchChallenges();
     }, []);
 

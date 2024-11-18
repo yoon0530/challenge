@@ -41,13 +41,13 @@ const Account = () => {
             setMessage('등록이 완료되었습니다.')
         } catch (error) {
             console.error('데이터 전송 중 오류 발생:', error);
-            setMessage('환전 중 오류가 발생했습니다. 다시 시도해주세요.');
+            setMessage('오류가 발생했습니다. 다시 시도해주세요.');
         }
     };
 
     return (
         <div className={styles.container}>
-            <h2 className={styles.heading}>포인트 환전</h2>
+            <h2 className={styles.heading}>계좌 등록</h2>
             {message && <p className={styles.message}>{message}</p>}
             <form onSubmit={handleSubmit}>
                 <div className={styles.formGroup}>
