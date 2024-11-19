@@ -4,7 +4,8 @@ import QandA from './QandA'; // 질문답변 컴포넌트
 import AdminPoint from './AdminPoint'; // 포인트 관리 컴포넌트
 import Exchange from './Exchange'; // 환전 관리 컴포넌트
 import Capproval from './Capproval';
-import Recharge from "./Recharge"; // 챌린지 관리 컴포넌트
+import Recharge from "./Recharge";
+import AdminAuth from "./AdminAuth"; // 챌린지 관리 컴포넌트
 
 
 const AdminPage = () => {

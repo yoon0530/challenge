@@ -49,11 +49,6 @@ function Nav({ isLoggedIn, onLogout }) {
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink style={getLinkStyle} to="/review">
-                                후기
-                            </NavLink>
-                        </li>
-                        <li>
                             <NavLink to="/adminpage" style={getLinkStyle}>관리자페이지</NavLink>
                         </li>
                         <li>

@@ -12,9 +12,10 @@ const InfoEdit = () => {
     password: '',
     rpassword: '',
     nickName: '',
-    image: ''
+    imageDir: ''
   });
 
+  const [previewImage, setPreviewImage] = useState(null);
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -23,6 +24,22 @@ const InfoEdit = () => {
       ...prevState,
       [name]: value
     }));
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setPreviewImage(reader.result); // 이미지 미리보기 업데이트
+      };
+      reader.readAsDataURL(file);
+
+      setUserInfo((prevState) => ({
+        ...prevState,
+        image: file // 파일 객체를 저장
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -36,16 +53,17 @@ const InfoEdit = () => {
 
     try {
       const token = localStorage.getItem('auth-token');
+      const formData = new FormData();
 
-      await axios.put(`${host}auth/modifyuser`, {
-        email: userInfo.email,
-        password: userInfo.password,
-        phoneNumber: userInfo.phoneNumber,
-        nickName: userInfo.nickName,
-        imageDir: userInfo.image
-      }, {
+      formData.append('email', userInfo.email);
+      formData.append('password', userInfo.password);
+      formData.append('phoneNumber', userInfo.phoneNumber);
+      formData.append('nickName', userInfo.nickName);
+      formData.append('image', userInfo.image);
+
+      await axios.put(`${host}auth/modifyuser`, formData, {
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'multipart/form-data', // FormData 전송을 위해 설정
           'auth-token': token
         }
       });
@@ -64,8 +82,10 @@ const InfoEdit = () => {
         <form onSubmit={handleSubmit}>
           <div className="profile-image-container">
             <label htmlFor="image-upload">
-              {userInfo.image ? (
-                  <img src={userInfo.image} alt="Profile" className="profile-image" />
+              {previewImage ? (
+                  <img src={previewImage} alt="Profile" className="profile-image"/>
+              ) : userInfo.image ? (
+                  <img src={URL.createObjectURL(userInfo.image)} alt="Profile" className="profile-image"/>
               ) : (
                   <div className="profile-placeholder profile-image"></div>
               )}
@@ -74,26 +94,26 @@ const InfoEdit = () => {
                 type="file"
                 id="image-upload"
                 accept="image/*"
-                onChange={(e) => setUserInfo({...userInfo, image: e.target.value})}
-                style={{ display: 'none' }}
+                onChange={handleImageChange}
+                style={{display: 'none'}}
             />
           </div>
 
           <div className="form-group">
             <label htmlFor="nickName">닉네임</label>
-            <input type="text" id="nickName" name="nickName" value={userInfo.nickName} onChange={handleInputChange} />
+            <input type="text" id="nickName" name="nickName" value={userInfo.nickName} onChange={handleInputChange}/>
           </div>
           <div className="form-group">
             <label htmlFor="email">이메일</label>
-            <input type="email" id="email" name="email" value={userInfo.email} onChange={handleInputChange} />
+            <input type="email" id="email" name="email" value={userInfo.email} onChange={handleInputChange}/>
           </div>
           <div className="form-group">
             <label htmlFor="password">비밀번호</label>
-            <input type="password" id="pw" name="password" value={userInfo.password} onChange={handleInputChange} />
+            <input type="password" id="pw" name="password" value={userInfo.password} onChange={handleInputChange}/>
           </div>
           <div className="form-group">
             <label htmlFor="rpassword">비밀번호 확인</label>
-            <input type="password" id="rpw" name="rpassword" value={userInfo.rpassword} onChange={handleInputChange} />
+            <input type="password" id="rpw" name="rpassword" value={userInfo.rpassword} onChange={handleInputChange}/>
           </div>
           <div className="form-group">
             <label htmlFor="phoneNumber">전화번호</label>

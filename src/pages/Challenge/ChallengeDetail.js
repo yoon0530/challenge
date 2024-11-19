@@ -117,7 +117,7 @@ const ChallengeDetail = () => {
             <button onClick={handleEnroll} className="enroll-button" disabled={isEnrolled}>{isEnrolled ? "신청 완료" : "신청"}</button>
         </div>
         <div className="challenge-review">
-            <Review challengeAuthId={challengeId} />
+            <Review challengeId={challengeId} />
         </div>
         </>
     );

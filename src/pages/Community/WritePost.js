@@ -10,21 +10,30 @@ const WritePost = ({ userName }) => {
     const [content, setContent] = useState('');
     const [rank, setRank] = useState();
     const [type, setType] = useState();
+    const [image, setImage] = useState(null); // 사진 상태 추가
     const navigate = useNavigate();
     const token = localStorage.getItem('auth-token');
+
+    const handleImageChange = (e) => {
+        setImage(e.target.files[0]); // 파일 선택 시 상태 업데이트
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (title && content) {
+            const formData = new FormData(); // FormData 생성
+            formData.append('title', title);
+            formData.append('content', content);
+            formData.append('rank', rank);
+            formData.append('type', type);
+            if (image) {
+                formData.append('image', image);
+            }
+
             try {
-                await axios.post(`${host}community/`, {
-                    title: title,
-                    content: content,
-                    rank: rank,
-                    type: type
-                },{
+                await axios.post(`${host}community/`, formData, {
                     headers: {
-                        'Content-Type': 'application/json',
+                        'Content-Type': 'multipart/form-data',
                         'auth-token': token,
                     },
                 });
@@ -56,6 +65,14 @@ const WritePost = ({ userName }) => {
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
                         required
+                    />
+                </div>
+                <div>
+                    <label>사진 첨부</label>
+                    <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageChange}
                     />
                 </div>
                 <select

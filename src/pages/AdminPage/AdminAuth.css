@@ -1,0 +1,56 @@
+.admin-auth-page {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.admin-auth-list {
+    list-style: none;
+    padding: 0;
+}
+
+.admin-auth-item {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    padding: 15px;
+    background-color: #f9f9f9;
+}
+
+.admin-auth-item h3 {
+    margin: 0 0 10px;
+}
+
+.admin-auth-item p {
+    margin: 5px 0;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+}
+
+.approve-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.reject-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.approve-button:hover {
+    background-color: #218838;
+}
+
+.reject-button:hover {
+    background-color: #c82333;
+}

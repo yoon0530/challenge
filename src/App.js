@@ -37,29 +37,13 @@ import Exchange from "./pages/AdminPage/Exchange";
 import Capproval from "./pages/AdminPage/Capproval";
 import AdminNav from "./pages/AdminPage/AdminNav";
 import Recharge from "./pages/AdminPage/Recharge";
+import AdminAuth from "./pages/AdminPage/AdminAuth";
 
 function App() {
     const [userName, setUserName] = useState(() => JSON.parse(localStorage.getItem('user'))?.name || '');
     const [isLoggedIn, setIsLoggedIn] = useState(() => localStorage.getItem("isLoggedIn") === "true");
     const [parsed, setParsed] = useState(() => JSON.parse(localStorage.getItem('user')));
     const [challenges, setChallenges] = useState([]);
-
-    useEffect(() => {
-        const fetchChallenges = async () => {
-            try {
-                const response = await axios.get(`${host}challenge/list`, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                });
-                setChallenges(response.data);
-            } catch (error) {
-                console.error("Error fetching challenges data:", error);
-            }
-        };
-
-        fetchChallenges();
-    }, []);
 
     const handleLogin = (user) => {
         setIsLoggedIn(true);
@@ -93,6 +77,7 @@ function App() {
                     <Route path="/create-challenge" element={<CreateChallengePage />} />
                     <Route path="/my-challenge" element={<MyChallenge />} />
                     <Route path="/review" element={<Review />} />
+                    <Route path="adminauth/:cAuthId" element={<AdminAuth/>} />
 
                     <Route path="/adminpage" element={<PrivateRoute isLoggedIn={isLoggedIn}><AdminPage /></PrivateRoute>}>
                         <Route path="qanda" element={<QandA />} />

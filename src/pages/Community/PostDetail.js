@@ -14,7 +14,8 @@ const PostDetail = ({ userName }) => {
         votes: '',
         views: '',
         createdAt: '',
-        updatedAt: ''
+        updatedAt: '',
+        imageUrl: '', // 이미지 URL 추가
     });
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState('');
@@ -39,11 +40,11 @@ const PostDetail = ({ userName }) => {
 
         const fetchComments = async () => {
             try {
-                const response = await axios.get(`${host}comment/${id}`,{
+                const response = await axios.get(`${host}comment/${id}`, {
                     headers: {
                         'Content-Type': 'application/json',
                     }
-                    });
+                });
                 const mappedComments = response.data.result.map(res => ({
                     commentId: res.commentId,
                     author: res.nickName,
@@ -79,9 +80,9 @@ const PostDetail = ({ userName }) => {
                 }
             );
 
-            setComments([ ...comments,response.data]);
+            setComments([...comments, response.data]);
             setNewComment('');
-            window.location.reload()
+            window.location.reload();
         } catch (error) {
             alert("댓글 추가에 실패했습니다.");
         }
@@ -99,7 +100,6 @@ const PostDetail = ({ userName }) => {
                 setComments(comments.filter(comment => comment.commentId !== commentId));
                 alert("댓글이 삭제되었습니다.");
             } catch (error) {
-                console.log(comments.commentId);
                 console.error("Error deleting comment:", error);
                 alert("댓글 삭제에 실패했습니다.");
             }
@@ -137,17 +137,23 @@ const PostDetail = ({ userName }) => {
     return (
         <div className="post-detail-container">
             <h2>{post.title}</h2>
+            {post.imageDir && (
+                <img
+                    src={post.imageDir}
+                    alt="Post"
+                    className="post-image"
+                />
+            )}
             <p>{post.content}</p>
             <p>작성자: {post.nickName}</p>
             <p>작성일: {post.createdAt}</p>
             <p>조회수: {post.views}</p>
 
-                <div className="button-group">
-                    <button onClick={handleEdit} className="edit-button">수정</button>
-                    <button onClick={handleDelete} className="delete-button">삭제</button>
-                </div>
+            <div className="button-group">
+                <button onClick={handleEdit} className="edit-button">수정</button>
+                <button onClick={handleDelete} className="delete-button">삭제</button>
+            </div>
 
-            {/* 댓글 입력 폼 */}
             <li className="comment-section">
                 <h3>댓글 {comments.length}개</h3>
                 <div className="comment-input-container">
@@ -162,17 +168,16 @@ const PostDetail = ({ userName }) => {
                 </div>
             </li>
 
-            {/* 댓글 리스트 */}
             <ul className="comment-list">
                 {comments.map(comment => (
-                    <li key={comment.id} className="comment-item">
+                    <li key={comment.commentId} className="comment-item">
                         <p>작성자: {comment.author}</p>
                         <p>{comment.content}</p>
                         <p>추천수: {comment.votes}</p>
                         <p>작성일: {comment.createdAt}</p>
-                            <button onClick={() => handleDeleteComment(comment.commentId)} className="delete-comment-button">
-                                댓글 삭제
-                            </button>
+                        <button onClick={() => handleDeleteComment(comment.commentId)} className="delete-comment-button">
+                            댓글 삭제
+                        </button>
                     </li>
                 ))}
             </ul>
