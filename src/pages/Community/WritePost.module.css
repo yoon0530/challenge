@@ -1,0 +1,116 @@
+/* 전체 컨테이너 */
+.writePostContainer {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+/* 제목 */
+.title {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* 폼 레이블 */
+.formLabel {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #555;
+}
+
+/* 입력 필드 및 텍스트 영역 */
+.formInput,
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+textarea {
+    height: 120px;
+    resize: none;
+}
+
+.formInput:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+}
+
+/* 드롭다운 선택 스타일 */
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3e%3cpath fill='%23999' d='M2 0L0 2h4zM2 5L0 3h4z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px 12px;
+}
+
+/* 파일 첨부 스타일 */
+input[type="file"] {
+    border: none;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 16px;
+}
+
+/* 버튼 */
+.submitButton {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submitButton:disabled {
+    background-color: #b0bec5;
+    cursor: not-allowed;
+}
+
+.r {
+    display: flex;
+    flex-direction: column;
+}
+
+.submitButton:hover:not(:disabled) {
+    background-color: #0056b3;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .writePostContainer {
+        width: 90%;
+    }
+
+    .title {
+        font-size: 24px;
+    }
+
+    .submitButton {
+        font-size: 16px;
+        padding: 10px;
+    }
+}

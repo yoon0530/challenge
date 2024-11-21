@@ -1,0 +1,149 @@
+.signup {
+    display: flex;
+    justify-content: center;
+    margin: 50px 0 100px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 40vw;
+}
+
+.title {
+    width: 500px;
+    border-bottom: 1px solid #000;
+}
+
+.mainTitle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    font-size: 35px;
+}
+
+.subTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.fontBold {
+    color: #000;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.fontRight {
+    display: inline;
+    color: #000;
+}
+
+.fontRed {
+    color: rgb(153, 15, 15);
+    font-weight: 700;
+}
+
+.inputTable {
+    width: 500px;
+    margin-top: 20px;
+}
+
+.profileImageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.profilePlaceholder,
+.profileImage {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    object-fit: cover;
+}
+
+.agreement {
+    display: flex;
+    justify-content: space-between;
+    width: 500px;
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid #000;
+}
+
+.agreementTitle {
+    color: #000;
+}
+
+.agreementTitleRed {
+    color: rgb(153, 15, 15);
+}
+
+.agreementList {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    color: #000;
+}
+
+.agreementListInfoBox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.checkButtonWrapper {
+    margin-right: 10px;
+}
+
+.checkButton {
+    width: 25px;
+    height: 25px;
+    color: #000;
+    cursor: pointer;
+}
+
+.disabled {
+    width: 25px;
+    height: 25px;
+    color: rgba(143, 116, 87, 0.434);
+}
+
+.agreeList {
+    font-size: 15px;
+}
+
+.agreeDetail {
+    color: rgba(143, 116, 87, 0.434);
+    font-size: 13px;
+}
+
+.agreeDetails {
+    color: rgb(153, 15, 15);
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.inputButton {
+    width: 180px;
+    height: 40px;
+    margin-top: 50px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    background-color: #000;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.inputButton:hover {
+    background-color: #333;
+}

@@ -166,3 +166,8 @@
     background-color: rgba(143, 116, 87, 0.131);
     color: #000; /* $color-main 대체 */
 }
+
+button {
+    padding: 10px 20px;
+    cursor: pointer;
+}

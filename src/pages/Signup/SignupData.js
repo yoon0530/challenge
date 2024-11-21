@@ -21,12 +21,17 @@ export const SIGNUP_LIST = [
         name: 'passwordCheck',
         type: 'password',
     },
-    { id: 4, title: '이름', placeholder: '실명으로 기입해주세요', name: 'nickName' },
+    {
+        id: 4,
+        title: '이름',
+        placeholder: '실명으로 기입해주세요',
+        name: 'nickName'
+    },
     {
         id: 5,
         title: '휴대전화',
         placeholder: '휴대폰 번호를 입력하세요',
-        name: 'phone',
+        name: 'phoneNumber',
     },
 ];
 

@@ -1,43 +1,43 @@
-.admin-container {
+.adminContainer {
     display: flex;
-    flex-direction: column; /* 세로 정렬로 변경 */
+    flex-direction: column; /* 세로 정렬 */
     min-height: 100vh;
     font-family: Arial, sans-serif;
 }
 
-.ad{
+.ad {
     text-align: center;
     margin-top: 30px;
     margin-bottom: 50px;
 }
 
-.admin-sidebar {
+.adminSidebar {
     display: flex;
     justify-content: center; /* 중앙 정렬 */
     background-color: #f8f9fa;
     border-bottom: 1px solid #dee2e6; /* 가로형 네비바 구분선 */
-    padding: 10px 0; /* 상하 여백 추가 */
+    padding: 10px 0; /* 상하 여백 */
 }
 
-.admin-sidebar ul {
+.adminSidebar ul {
     display: flex;
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.admin-sidebar ul li {
+.adminSidebar ul li {
     margin: 0 20px; /* 좌우 간격 */
     cursor: pointer;
     font-weight: bold;
     color: #495057;
 }
 
-.admin-sidebar ul li:hover {
+.adminSidebar ul li:hover {
     color: #007bff;
 }
 
-.admin-content {
+.adminContent {
     flex-grow: 1;
     padding: 20px;
 }

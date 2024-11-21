@@ -1,32 +1,46 @@
-.challenges-page {
-    width: 80%;
-    margin: auto;
-    padding: 20px;
-}
-
-.challenge {
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* 배경 흐리게 */
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    z-index: 999; /* 화면 위에 떠 있도록 */
 }
 
-.create-challenge-button {
-    background-color: #959da5;
+.modalContent {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.closeButton {
+    margin-top: 20px;
+    background-color: #ff4747;
     color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 10px 15px;
     cursor: pointer;
+    border-radius: 5px;
 }
 
-.challenges-grid {
+.closeButton:hover {
+    background-color: #ff2a2a;
+}
+
+.coursesGrid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
     margin-top: 20px;
 }
 
-.challenge-card {
+.courseCard {
     background-color: #f9f9f9;
     border-radius: 10px;
     padding: 20px;
@@ -34,11 +48,11 @@
     transition: transform 0.2s;
 }
 
-.challenge-card:hover {
+.courseCard:hover {
     transform: scale(1.02);
 }
 
-.challenge-badge {
+.courseBadge {
     background-color: #e0e0e0;
     padding: 5px 10px;
     border-radius: 50px;
@@ -48,38 +62,38 @@
     margin-bottom: 10px;
 }
 
-.challenge-title {
+.courseTitle {
     font-size: 1.25em;
     font-weight: bold;
     margin: 0;
 }
 
-.challenge-dates {
+.courseDates {
     color: #757575;
     font-size: 0.9em;
     margin-bottom: 10px;
 }
 
-.challenge-description {
+.courseDescription {
     margin: 10px 0;
     font-size: 0.9em;
     color: #424242;
 }
 
-.challenge-missions, .challenge-rewards {
+.courseMissions, .courseRewards {
     font-size: 0.9em;
     margin: 10px 0;
 }
 
-.challenge-missions ul {
+.courseMissions ul {
     list-style-type: none;
     padding: 0;
 }
 
-.challenge-missions li {
+.courseMissions li {
     margin: 5px 0;
 }
 
-.challenge-rewards span {
+.courseRewards span {
     font-weight: bold;
 }

@@ -1,39 +1,39 @@
 /* 기본 컨테이너 스타일 */
-.info-edit-container {
+.infoEditContainer {
   width: 400px;
   margin: 0 auto;
   padding: 20px;
   font-family: Arial, sans-serif;
 }
 
-.info-edit-container h2 {
+.infoEditContainer h2 {
   font-size: 24px;
   text-align: center;
   margin-bottom: 20px;
 }
 
 /* 프로필 사진 컨테이너 */
-.profile-image-container {
+.profileImageContainer {
   position: relative;
   text-align: center;
   margin-bottom: 20px;
 }
 
-.profile-image {
+.profileImage {
   width: 100px;
   height: 100px;
   border-radius: 50%;
   object-fit: cover;
 }
 
-.profile-placeholder {
+.profilePlaceholder {
   width: 100px;
   height: 100px;
   background-color: #e0e0e0;
   border-radius: 50%;
 }
 
-.profile-image-overlay {
+.profileImageOverlay {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -48,24 +48,24 @@
   cursor: pointer;
 }
 
-.camera-icon {
+.cameraIcon {
   width: 20px;
   height: 20px;
   opacity: 0.5;
 }
 
 /* 입력 필드 스타일 */
-.form-group {
+.formGroup {
   margin-bottom: 15px;
 }
 
-.form-group label {
+.formGroup label {
   display: block;
   font-size: 14px;
   margin-bottom: 5px;
 }
 
-.form-group input {
+.formGroup input {
   width: 100%;
   padding: 10px;
   font-size: 16px;
@@ -74,7 +74,7 @@
   box-sizing: border-box;
 }
 
-.form-group select {
+.formGroup select {
   width: 30%;
   padding: 10px;
   font-size: 16px;
@@ -84,13 +84,13 @@
   margin-right: 5px;
 }
 
-.form-group input:disabled {
+.formGroup input:disabled {
   background-color: #f9f9f9;
   color: #888;
 }
 
 /* 버튼 스타일 */
-button[type="submit"] {
+.submitButton {
   width: 100%;
   padding: 12px;
   font-size: 16px;
@@ -101,11 +101,11 @@ button[type="submit"] {
   cursor: pointer;
 }
 
-button[type="submit"]:hover {
+.submitButton:hover {
   background-color: #555;
 }
 
-.edit-button {
+.editButton {
   margin-top: 20px;
   padding: 10px 20px;
   font-size: 16px;
@@ -116,6 +116,6 @@ button[type="submit"]:hover {
   cursor: pointer;
 }
 
-.edit-button:hover {
+.editButton:hover {
   background-color: #45a049;
 }

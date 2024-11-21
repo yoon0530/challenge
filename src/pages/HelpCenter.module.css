@@ -1,0 +1,90 @@
+/* 전체 컨테이너 스타일 */
+.inquiryFormContainer {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+}
+
+/* 제목 스타일 */
+.inquiryFormContainer h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* 폼 스타일 */
+.inquiryForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* 폼 그룹 스타일 */
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.formGroup label {
+  font-weight: bold;
+  color: #555;
+}
+
+/* 입력 필드 스타일 */
+.inquiryForm input,
+.inquiryForm select,
+.inquiryForm textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  outline: none;
+}
+
+/* 텍스트 영역 스타일 */
+.inquiryForm textarea {
+  resize: none;
+  height: 100px;
+}
+
+/* 포커스 상태 */
+.inquiryForm input:focus,
+.inquiryForm select:focus,
+.inquiryForm textarea:focus {
+  border-color: #007bff;
+}
+
+/* 라디오 버튼 그룹 */
+.radioGroup {
+  display: flex;
+  gap: 15px;
+}
+
+.radioGroup label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: normal;
+}
+
+/* 제출 버튼 스타일 */
+.submitButton {
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submitButton:hover {
+  background-color: #0056b3;
+}

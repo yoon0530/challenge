@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import './WritePost.css';
+import styles from './WritePost.module.css';
 import host from "../../api";
 
 const EditPost = () => {
@@ -67,35 +67,40 @@ const EditPost = () => {
     };
 
     return (
-        <div className="write-post-container">
-            <h2>글 수정</h2>
+        <div className={styles.editPostContainer}>
+            <h2 className={styles.title}>글 수정</h2>
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label>제목</label>
+                <div className={styles.formField}>
+                    <label className={styles.formLabel}>제목</label>
                     <input
                         type="text"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
+                        className={styles.formInput}
                         required
                     />
                 </div>
-                <div>
-                    <label>내용</label>
+                <div className={styles.formField}>
+                    <label className={styles.formLabel}>내용</label>
                     <textarea
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
+                        className={styles.formTextarea}
                         required
                     />
                 </div>
-                <div>
-                    <label>사진 첨부</label>
+                <div className={styles.formField}>
+                    <label className={styles.formLabel}>사진 첨부</label>
                     <input
                         type="file"
                         accept="image/*"
                         onChange={handleImageChange}
+                        className={styles.formInput}
                     />
                 </div>
-                <button type="submit">작성 완료</button>
+                <button type="submit" className={styles.submitButton}>
+                    작성 완료
+                </button>
             </form>
         </div>
     );

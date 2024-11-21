@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./AdminAuth.css";
+import styles from "./AdminAuth.module.css";
 import host from "../../api";
 import { useParams } from "react-router-dom";
 
 const AdminAuth = () => {
-    const [item, setItem] = useState(null); // 초기 상태를 null로 설정
+    const [item, setItem] = useState(null);
     const token = localStorage.getItem("auth-token");
-    const { cAuthId } = useParams(); // URL 매개변수에서 cAuthId 가져오기
+    const { cAuthId } = useParams();
 
     useEffect(() => {
         const fetchItem = async () => {
@@ -19,7 +19,6 @@ const AdminAuth = () => {
                     },
                 });
 
-                // 데이터가 존재하면 설정, 없으면 null로 설정
                 if (response.data && response.data.result) {
                     setItem(response.data.result);
                 } else {
@@ -27,14 +26,13 @@ const AdminAuth = () => {
                 }
             } catch (error) {
                 console.error("Error fetching data:", error);
-                setItem(null); // 에러 발생 시 null로 설정
+                setItem(null);
             }
         };
 
         fetchItem();
     }, [cAuthId, token]);
 
-    // 승인 처리
     const handleApprove = async (id) => {
         try {
             await axios.put(
@@ -57,7 +55,6 @@ const AdminAuth = () => {
         }
     };
 
-    // 거절 처리
     const handleReject = async (id) => {
         try {
             await axios.put(
@@ -80,24 +77,29 @@ const AdminAuth = () => {
         }
     };
 
-    // item이 null이면 로딩 메시지 표시
     if (!item) {
         return <p>데이터를 불러오는 중이거나 항목이 없습니다.</p>;
     }
 
     return (
-        <div className="admin-auth-page">
+        <div className={styles.adminAuthPage}>
             <h2>관리자 인증 관리</h2>
-            <div className="admin-auth-item">
+            <div className={styles.adminAuthItem}>
                 <h3>{item.description || "설명 없음"}</h3>
-                <p><strong>내용:</strong> {item.contents || "내용 없음"}</p>
-                <p><strong>작성 날짜:</strong> {item.createdAt ? new Date(item.createdAt).toLocaleDateString() : "날짜 없음"}</p>
-                <p><strong>사용자 이름:</strong> {item.nickname || "닉네임 없음"}</p>
-                <div className="button-group">
-                    <button onClick={() => handleApprove(item.id)} className="approve-button">
+                <p>
+                    <strong>내용:</strong> {item.contents || "내용 없음"}
+                </p>
+                <p>
+                    <strong>작성 날짜:</strong> {item.createdAt ? new Date(item.createdAt).toLocaleDateString() : "날짜 없음"}
+                </p>
+                <p>
+                    <strong>사용자 이름:</strong> {item.nickname || "닉네임 없음"}
+                </p>
+                <div className={styles.buttonGroup}>
+                    <button onClick={() => handleApprove(item.id)} className={styles.approveButton}>
                         승인
                     </button>
-                    <button onClick={() => handleReject(item.id)} className="reject-button">
+                    <button onClick={() => handleReject(item.id)} className={styles.rejectButton}>
                         거절
                     </button>
                 </div>

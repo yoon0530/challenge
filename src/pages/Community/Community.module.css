@@ -1,65 +1,67 @@
-.board-container {
+/* 게시판 컨테이너 스타일 */
+.boardContainer {
     width: 80%;
     margin: auto;
     margin-bottom: 50px;
     text-align: center;
-    display:block;
+    display: block;
     justify-content: center;
     text-align: center;
 }
 
-h1 {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.post-table {
+/* 게시물 테이블 스타일 */
+.postTable {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 50px;
 }
 
-.post-table th, .post-table td {
+.postTable th, .postTable td {
     padding: 12px;
     border-bottom: 1px solid #ddd; /* 가로선만 보이도록 설정 */
 }
 
-.post-table th {
+.postTable th {
     font-weight: bold;
     text-align: left;
 }
 
-.post-table th:first-child, .post-table td:first-child {
+.postTable th:first-child, .postTable td:first-child {
     text-align: left;
     width: 10%;
 }
 
-.post-table td:nth-child(2) {
+.postTable td:nth-child(2) {
     cursor: pointer;
 }
 
-.post-table .createdAt {
+/* 작성일 열 스타일 */
+.createdAt {
     text-align: center;
     padding: 0;
     margin: 0;
     width: auto;
 }
-.post-table .author {
+
+/* 작성자 열 스타일 */
+.author {
     text-align: right;
     padding: 0;
     margin: 0;
 }
 
-.post-row:hover td:nth-child(2) {
+/* 게시물 행 호버 스타일 */
+.postRow:hover td:nth-child(2) {
     color: #333;
 }
 
-.no-posts-message {
+/* 게시물이 없을 때 메시지 스타일 */
+.noPostsMessage {
     text-align: center;
     padding: 20px;
 }
 
+/* 페이지네이션 스타일 */
 .pagination {
     display: flex;
     justify-content: center;
@@ -79,7 +81,8 @@ h1 {
     color: white;
 }
 
-.write-button {
+/* 글 작성 버튼 스타일 */
+.writeButton {
     margin-top: 20px;
     padding: 10px 20px;
     background-color: #333;

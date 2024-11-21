@@ -1,0 +1,105 @@
+/* 전체 상세 페이지 컨테이너 */
+.challengeDetail {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+/* 제목 스타일 */
+.challengeDetail h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* 정보 텍스트 스타일 */
+.challengeDetail p {
+  font-size: 16px;
+  color: #555;
+  margin: 10px 0;
+  line-height: 1.6;
+}
+
+.challengeDetail strong {
+  color: #333;
+  font-weight: bold;
+}
+
+/* 버튼 그룹 */
+.buttonGroup {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* 삭제 버튼 */
+.deleteButton {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  background-color: #f44336;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.deleteButton:hover {
+  background-color: #d32f2f;
+}
+
+/* 수정 버튼 */
+.editButton {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.editButton:hover {
+  background-color: #45a049;
+}
+
+/* 신청 버튼 */
+.enrollButton {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  background-color: #2196f3;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.enrollButton:hover {
+  background-color: #1976d2;
+}
+
+.enrollButton:disabled {
+  background-color: #b0bec5;
+  cursor: not-allowed;
+}
+
+/* 리뷰 섹션 */
+.challengeReview {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}

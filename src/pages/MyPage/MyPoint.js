@@ -3,6 +3,7 @@ import PointHistory from "./PointHistory";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import host from "../../api";
+import './MyPoint.css'
 
 const MyPoint = () => {
     const navigate = useNavigate();

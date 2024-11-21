@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import styles from './App.module.css';
 import HomePage from './pages/HomePage';
@@ -26,18 +25,22 @@ import HelpCenter from "./pages/HelpCenter";
 import HelpPost from "./pages/HelpPost";
 import Review from "./pages/Review";
 import MyInfo from "./pages/MyPage/MyInfo";
-import host from "./api";
 import MyPoint from "./pages/MyPage/MyPoint";
 import Account from "./pages/MyPage/Account";
 import EditChallenge from "./pages/Challenge/EditChallenge";
 import AdminPage from "./pages/AdminPage/AdminPage";
 import QandA from "./pages/AdminPage/QandA";
-import AdminPoint from "./pages/AdminPage/AdminPoint";
 import Exchange from "./pages/AdminPage/Exchange";
 import Capproval from "./pages/AdminPage/Capproval";
 import AdminNav from "./pages/AdminPage/AdminNav";
 import Recharge from "./pages/AdminPage/Recharge";
 import AdminAuth from "./pages/AdminPage/AdminAuth";
+import QandAlist from "./pages/QandAList";
+import QandAListPrivate from "./pages/MyPage/QandAListPrivate";
+import QandADetail from "./pages/MyPage/QandADetail";
+import Reward from "./pages/AdminPage/Reward";
+import RewardInfo from "./pages/AdminPage/RewardInfo";
+import MyChallengeDetail from "./pages/Challenge/MyChallengeDetail";
 
 function App() {
     const [userName, setUserName] = useState(() => JSON.parse(localStorage.getItem('user'))?.name || '');
@@ -73,15 +76,17 @@ function App() {
                     <Route path="/signup" element={<><SignupPage /><Footer className={styles.footer} /></>} />
                     <Route path="/challenge" element={<ChallengesPage challenges={challenges} />} />
                     <Route path="/challenge/:challengeId" element={<ChallengeDetail />} />
+                    <Route path="/mychallenge/:challengeId" element={<MyChallengeDetail />} />
                     <Route path="/editchallenge/:challengeId" element={<EditChallenge />} />
                     <Route path="/create-challenge" element={<CreateChallengePage />} />
                     <Route path="/my-challenge" element={<MyChallenge />} />
                     <Route path="/review" element={<Review />} />
                     <Route path="adminauth/:cAuthId" element={<AdminAuth/>} />
+                    <Route path="reward" element={<Reward/>} />
+                    <Route path="adminpage/rewardinfo/:id" element={<RewardInfo/>} />
 
                     <Route path="/adminpage" element={<PrivateRoute isLoggedIn={isLoggedIn}><AdminPage /></PrivateRoute>}>
                         <Route path="qanda" element={<QandA />} />
-                        <Route path="adminpoint" element={<AdminPoint />}/>
                         <Route path="exchange" element={<Exchange />}/>
                         <Route path="recharge" element={<Recharge />}/>
                         <Route path="capproval" element={<Capproval/>} />
@@ -102,8 +107,11 @@ function App() {
                         <Route path="pointrecharge" element={<PointRecharge />} />
                         <Route path="account" element={<Account />} />
                         <Route path="myinfo" element={<MyInfo />} />
+                        <Route path="qandalist" element={<QandAlist />}/>
                         <Route path="infoEdit" element={<InfoEdit />}/>
-                        <Route path="helpCenter" element={<HelpCenter />} />
+                        <Route path="helpcenter" element={<HelpCenter />} />
+                        <Route path="qandalistprivate" element={<QandAListPrivate />} />
+                        <Route path="qandadetail/:id" element={<QandADetail />} />
                         <Route path="helpPost" element={<HelpPost />} />
                     </Route>
 

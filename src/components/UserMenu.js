@@ -1,35 +1,38 @@
-import {useCallback, useEffect, useState} from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from "axios";
 import personIcon from '../assets/person.png';
 import styles from './UserMenu.module.css';
 import host from "../api";
-import axios from "axios";
 
 function UserMenu({ isLoggedIn, onLogout }) {
     const [isOpen, setIsOpen] = useState(false);
-    const navigate = useNavigate();
     const [logoUrl, setLogoUrl] = useState('');
-    const storedUser = JSON.parse(localStorage.getItem('user'));
-    const userId = storedUser.userId || storedUser;
+    const navigate = useNavigate();
+
+    const storedUser = JSON.parse(localStorage.getItem('user')) || {};
+    const userId = storedUser?.userId || null;
     const token = localStorage.getItem('auth-token');
 
     useEffect(() => {
-        const fetchLogo = async () => {
-            try {
-                const response = await axios.get(`${host}auth/getuser/${userId}`, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'auth-token': token
-                    }
-                });
-                setLogoUrl(response.data.result[0]);
-            } catch (error) {
-                console.error('로고를 가져오는 데 실패했습니다:', error);
-            }
-        };
+        if (userId && token) {
+            const fetchLogo = async () => {
+                try {
+                    const response = await axios.get(`${host}auth/getuser/${userId}`, {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'auth-token': token
+                        }
+                    });
+                    setLogoUrl(response.data.result[0]);
+                } catch (error) {
+                    console.error('로고를 가져오는 데 실패했습니다:', error);
+                }
+            };
 
-        fetchLogo();
-    }, []);
+            fetchLogo();
+        }
+    }, [userId, token]);
 
     const handleButtonClick = useCallback((e) => {
         e.stopPropagation();
@@ -49,9 +52,10 @@ function UserMenu({ isLoggedIn, onLogout }) {
     return (
         <div className={styles.userMenu}>
             <button className={styles.iconButton} onClick={handleButtonClick}>
-                <img src={logoUrl.imageDir}
-                     alt="유저 메뉴"
-                     className={styles.userMenuImage}
+                <img
+                    src={logoUrl?.imageDir || personIcon} // 로고가 없으면 기본 아이콘 사용
+                    alt="유저 메뉴"
+                    className={styles.userMenuImage}
                 />
             </button>
             {isOpen && (

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import './Recharge.css';
+import styles from "./Recharge.module.css";
 import axios from "axios";
 import host from "../../api";
 
@@ -47,7 +47,6 @@ const Recharge = () => {
         }
     };
 
-    // 환전 거부
     const handleReject = async (id) => {
         try {
             await axios.put(
@@ -71,11 +70,11 @@ const Recharge = () => {
     };
 
     return (
-        <div className="admin-section">
+        <div className={styles.adminSection}>
             <h2>포인트 추가 리스트</h2>
             <ul>
                 {withdrawals.map((withdrawal) => (
-                    <li key={withdrawal.id} className="withdrawal-item">
+                    <li key={withdrawal.id} className={styles.withdrawalItem}>
                         <div>
                             <p>
                                 <strong>사용자:</strong> {withdrawal.nickName}
@@ -87,15 +86,15 @@ const Recharge = () => {
                                 <strong>환전 포인트:</strong> {withdrawal.amount} P
                             </p>
                         </div>
-                        <div className="action-buttons">
+                        <div className={styles.actionButtons}>
                             <button
-                                className="approve-button"
+                                className={styles.approveButton}
                                 onClick={() => handleApprove(withdrawal.id)}
                             >
                                 승인
                             </button>
                             <button
-                                className="reject-button"
+                                className={styles.rejectButton}
                                 onClick={() => handleReject(withdrawal.id)}
                             >
                                 거부

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, Outlet, useLocation } from 'react-router-dom';
-import './MyPage.css';
+import styles from './MyPage.module.css'; // styles로 가져오기
 import axios from 'axios';
 import host from "../../api";
 
@@ -55,63 +55,63 @@ function Mypage({ onLogout }) {
     }
 
     return (
-        <div className="mypage">
-            <div className="grayWrapper">
-                <div className="grayLeft">
+        <div className={styles.mypage}>
+            <div className={styles.grayWrapper}>
+                <div className={styles.grayLeft}>
                     <p>
                         안녕하세요
                         <br />
-                        오늘도 <span className="textBrown">도전 </span> 하는 당신 <br />정말 멋지네요.
+                        오늘도 <span className={styles.textBrown}>도전 </span> 하는 당신 <br />정말 멋지네요.
                     </p>
-                    <button className="buttonStyle">SIMPLE 회원</button>
+                    <button className={styles.buttonStyle}>SIMPLE 회원</button>
                 </div>
-                <div className="grayRight">
-                    <div className="grayRightTop">
-                        <div className="grayRightTopFirst">
+                <div className={styles.grayRight}>
+                    <div className={styles.grayRightTop}>
+                        <div className={styles.grayRightTopFirst}>
                             <span>포인트 적립 </span>
-                            <Link className="linkStyle" to="#">
+                            <Link className={styles.linkStyle} to="#">
                                 0원
                             </Link>
                         </div>
-                        <div className="grayRightTopSecond">
+                        <div className={styles.grayRightTopSecond}>
                             <span>포인트 충전 / 환전</span>
                             <div>
-                                <button className="pointbutton" onClick={() => navigate('/mypage/pointrecharge')}>충전하기</button>
+                                <button className={styles.pointbutton} onClick={() => navigate('/mypage/pointrecharge')}>충전하기</button>
                                 <button onClick={() => navigate('/mypage/pointexchange')}>환전하기</button>
                             </div>
                         </div>
                     </div>
-                    <div className="grayRightThird">
+                    <div className={styles.grayRightThird}>
                         <p>성공한 도전 내역</p>
-                        <Link className="linkStyle" to="#">
+                        <Link className={styles.linkStyle} to="#">
                             0개
                         </Link>
                     </div>
                 </div>
             </div>
-            <div className="whiteWrapper">
-                <div className="whiteInner">
-                    <div className="whiteLeft">
-                        <p className="title">마이페이지</p>
-                        <div className="boxList">
-                            <button onClick={()=>navigate('/mypage/myinfo')}>내 정보</button>
+            <div className={styles.whiteWrapper}>
+                <div className={styles.whiteInner}>
+                    <div className={styles.whiteLeft}>
+                        <p className={styles.title}>마이페이지</p>
+                        <div className={styles.boxList}>
+                            <button onClick={() => navigate('/mypage/myinfo')}>내 정보</button>
                             <button onClick={() => setShowRecentlyViewed(!showRecentlyViewed)}>최근 본 도전</button>
-                            <button>성공한 챌린지 내역</button>
                             <button onClick={() => navigate('/mypage/mypoint')}>포인트 관리</button>
-                            <button onClick={() => navigate('/mypage/helpCenter')}>1:1 문의</button>
+                            <button onClick={() => navigate('/mypage/qandalist')}>자주 묻는 질문</button>
+                            <button onClick={() => navigate('/mypage/qandalistprivate')}>1:1 문의</button>
                             <button onClick={handleDeleteProfile}>회원탈퇴</button>
                         </div>
                     </div>
-                    <div className="whiteRight">
-                        <div className="orderStatus">
+                    <div className={styles.whiteRight}>
+                        <div className={styles.orderStatus}>
                             <p>
                                 도전 현황<span>(현재 내가 신청한 진행 중인 도전)</span>
                             </p>
                             <Link to="/completedchallenges">
-                                <button className="link-button">지난 도전</button>
+                                <button className={styles.linkButton}>지난 도전</button>
                             </Link>
                         </div>
-                        <div className="inProgressChallenges">
+                        <div className={styles.inProgressChallenges}>
                             <Outlet/>
                         </div>
                     </div>

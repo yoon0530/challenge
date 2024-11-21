@@ -1,0 +1,102 @@
+.admin-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.admin-section h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 24px;
+    border-bottom: 2px solid #4a4a4a;
+    padding-bottom: 10px;
+}
+
+.admin-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.admin-section li {
+    background-color: white;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.admin-section li:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+}
+
+.admin-section li p {
+    margin: 8px 0;
+    color: #555;
+}
+
+.admin-section li strong {
+    color: #333;
+    margin-right: 8px;
+}
+
+/* 답변 폼 스타일 */
+form {
+    display: flex;
+    margin-top: 10px;
+}
+
+form input {
+    flex-grow: 1;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px 0 0 6px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+form input:focus {
+    border-color: #4a90e2;
+}
+
+form button {
+    padding: 8px 15px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 0 6px 6px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #357abd;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #e0e0e0;
+    margin: 15px 0;
+}
+
+/* 반응형 스타일 */
+@media (max-width: 600px) {
+    form {
+        flex-direction: column;
+    }
+
+    form input {
+        border-radius: 6px 6px 0 0;
+        margin-bottom: 10px;
+    }
+
+    form button {
+        border-radius: 0 0 6px 6px;
+        width: 100%;
+    }
+}

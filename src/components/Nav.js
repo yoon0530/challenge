@@ -15,50 +15,51 @@ function Nav({ isLoggedIn, onLogout }) {
         <div className={styles.nav}>
             <Container className={styles.container}>
                 <Link to="/">
-                    <img src={Clogo} alt="Challengers Logo" />
+                    <img src={Clogo} alt="Challengers Logo"/>
                 </Link>
                 <ul className={styles.menu}>
-                {!isLoggedIn ? (
-                    <>
-                        <li>
-                            <NavLink style={getLinkStyle} to="/challenge">
-                                도전
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink style={getLinkStyle} to="/community">
-                                게시판
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink style={getLinkStyle} to="/review">
-                                후기
-                            </NavLink>
-                        </li>
-                    </>
-                ) : (
-                    <>
-                        <li>
-                            <NavLink style={getLinkStyle} to="/challenge">
-                                도전
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink style={getLinkStyle} to="/community">
-                                게시판
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/adminpage" style={getLinkStyle}>관리자페이지</NavLink>
-                        </li>
-                        <li>
-                            <NavLink style={getLinkStyle} to="/mypage">
-                                마이페이지
-                            </NavLink>
-                        </li>
-
-                    </>
-                )}
+                    {!isLoggedIn ? (
+                        <>
+                            <li>
+                                <NavLink style={getLinkStyle} to="/challenge">
+                                    도전
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink style={getLinkStyle} to="/community">
+                                    게시판
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink style={getLinkStyle} to="/review">
+                                    후기
+                                </NavLink>
+                            </li>
+                        </>
+                    ) : (
+                        <>
+                            <li>
+                                <NavLink style={getLinkStyle} to="/challenge">
+                                    도전
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink style={getLinkStyle} to="/community">
+                                    게시판
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/adminpage" style={getLinkStyle}>
+                                    관리자페이지
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink style={getLinkStyle} to="/mypage">
+                                    마이페이지
+                                </NavLink>
+                            </li>
+                        </>
+                    )}
                     <li>
                         <UserMenu isLoggedIn={isLoggedIn} onLogout={onLogout}/>
                     </li>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import styles from './CreateChallengePage.module.css';
 import host from "../../api";
 
 const CreateChallengePage = () => {
@@ -21,7 +22,6 @@ const CreateChallengePage = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setChallengeData(prevData => ({ ...prevData, [name]: value }));
-        console.log("Updated challengeData:", { ...challengeData, [name]: value }); // 상태 업데이트 확인용 출력
     };
 
     const formatDateTime = (datetime) => {
@@ -41,9 +41,6 @@ const CreateChallengePage = () => {
 
         setIsSubmitting(true);
 
-        console.log("Endpoint URL:", `${host}challenge/`);  // 확인용 출력
-        console.log("토큰:", token);
-
         const formattedData = {
             ...challengeData,
             startDate: formatDateTime(challengeData.startDate),
@@ -60,7 +57,6 @@ const CreateChallengePage = () => {
             alert('도전이 성공적으로 추가되었습니다!');
             navigate('/challenge');
         } catch (error) {
-            console.log("ID:", loggedInUser);
             console.error('도전 생성 중 오류 발생:', error);
             alert('도전 생성에 실패했습니다.');
         } finally {
@@ -69,34 +65,82 @@ const CreateChallengePage = () => {
     };
 
     return (
-        <div className="create-challenge-page">
-            <h2 className="title">도전 생성</h2>
-            <form onSubmit={handleSubmit} className="create-challenge-form">
-                <label>
+        <div className={styles.createChallengePage}>
+            <h2 className={styles.title}>도전 생성</h2>
+            <form onSubmit={handleSubmit} className={styles.r} >
+                <label className={styles.formLabel}>
                     제목:
-                    <input type="text" name="description" value={challengeData.description} onChange={handleChange} required />
+                    <input
+                        type="text"
+                        name="description"
+                        value={challengeData.description}
+                        onChange={handleChange}
+                        className={styles.formInput}
+                        required
+                    />
                 </label>
-                <label>
+                <label className={styles.formLabel}>
                     참가비:
-                    <input type="number" name="participationFee" value={challengeData.participationFee} onChange={handleChange} required />
+                    <input
+                        type="number"
+                        name="participationFee"
+                        value={challengeData.participationFee}
+                        onChange={handleChange}
+                        className={styles.formInput}
+                        required
+                    />
                 </label>
-                <label>
+                <label className={styles.formLabel}>
                     시작 날짜:
-                    <input type="datetime-local" name="startDate" value={challengeData.startDate} onChange={handleChange} required />
+                    <input
+                        type="datetime-local"
+                        name="startDate"
+                        value={challengeData.startDate}
+                        onChange={handleChange}
+                        className={styles.formInput}
+                        required
+                    />
                 </label>
-                <label>
+                <label className={styles.formLabel}>
                     종료 날짜:
-                    <input type="datetime-local" name="endDate" value={challengeData.endDate} onChange={handleChange} required />
+                    <input
+                        type="datetime-local"
+                        name="endDate"
+                        value={challengeData.endDate}
+                        onChange={handleChange}
+                        className={styles.formInput}
+                        required
+                    />
                 </label>
-                <label>
+                <label className={styles.formLabel}>
                     총 단계:
-                    <input type="number" name="totalStep" value={challengeData.totalStep} onChange={handleChange} required />
+                    <input
+                        type="number"
+                        name="totalStep"
+                        value={challengeData.totalStep}
+                        onChange={handleChange}
+                        className={styles.formInput}
+                        required
+                    />
                 </label>
-                <label>
+                <label className={styles.formLabel}>
                     총 인원:
-                    <input type="number" name="maxHead" value={challengeData.maxHead} onChange={handleChange} required/>
+                    <input
+                        type="number"
+                        name="maxHead"
+                        value={challengeData.maxHead}
+                        onChange={handleChange}
+                        className={styles.formInput}
+                        required
+                    />
                 </label>
-                <button type="submit" disabled={isSubmitting}>{isSubmitting ? "제출 중..." : "도전 생성"}</button>
+                <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className={styles.formButton}
+                >
+                    {isSubmitting ? "제출 중..." : "도전 생성"}
+                </button>
             </form>
         </div>
     );

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './PointHistory.css';
+import styles from './PointHistory.module.css';
 import host from "../../api";
 
 const PointHistory = () => {
@@ -26,9 +26,9 @@ const PointHistory = () => {
     }, []);
 
     return (
-        <div className="point-history-container">
-            <h2 className="point-history-title">전체 포인트 내역</h2>
-            <table className="point-history-table">
+        <div className={styles.pointHistoryContainer}>
+            <h2 className={styles.pointHistoryTitle}>전체 포인트 내역</h2>
+            <table className={styles.pointHistoryTable}>
                 <thead>
                 <tr>
                     <th>날짜</th>
@@ -42,7 +42,7 @@ const PointHistory = () => {
                 {points.map((point) => (
                     <tr key={point.id}>
                         <td>{new Date(point.updatedAt).toLocaleDateString()}</td>
-                        <td className={point.amount < 0 ? 'negative' : 'positive'}>
+                        <td className={point.amount < 0 ? styles.negative : styles.positive}>
                             {point.amount.toLocaleString()} 원
                         </td>
                         <td>{point.addOrOut === 0 ? "입금" : "출금"}</td>

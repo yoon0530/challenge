@@ -1,43 +1,56 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import styles from './PointRecharge.module.css'; // styles 객체로 import합니다.
+import styles from './PointRecharge.module.css';
+import host from "../../api";
 
 const PointRecharge = () => {
-    const [accountNumber, setAccountNumber] = useState('');
-    const [amount, setAmount] = useState('');
-    const [message, setMessage] = useState('');
+    const [transactionType, setTransactionType] = useState(1); // 기본값 1 (충전)
+    const [chargeType, setChargeType] = useState(0); // 기본값 0 (현금 충전)
+    const [amount, setAmount] = useState(''); // 금액
+    const [message, setMessage] = useState(''); // 메시지 표시
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // 로그인한 사용자 정보를 localStorage에서 가져옵니다.
-        const user = JSON.parse(localStorage.getItem('user'));
-        const userId = user?.id; // user 객체가 존재할 경우 id를 가져옵니다.
+        const token = localStorage.getItem('auth-token');
 
-        const data = {
-            accountNumber,
-            amount: parseInt(amount, 10),
-            date: new Date().toISOString(),
-            userId  // 로그인한 사용자 ID를 포함합니다.
-        };
+        if (!amount || isNaN(amount) || amount <= 0) {
+            setMessage('올바른 금액을 입력해주세요.');
+            return;
+        }
 
         try {
-            const response = await axios.post('http://localhost:5000/recharges', data);
+            const response = await axios.post(
+                `${host}point/`,
+                {
+                    addOrOut: 1,
+                transactionType: chargeType, // 0(현금충전), 1(챌린지보상), 2(기타)
+                    amount: Number(amount), // 금액
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'auth-token': token,
+                    },
+                }
+            );
+            setMessage('요청이 성공적으로 처리되었습니다.');
             console.log('응답:', response.data);
-            setMessage('포인트 충전이 성공적으로 완료되었습니다.');
 
-            setAccountNumber('');
+            // 입력 필드 초기화
+            setTransactionType(1);
+            setChargeType(0);
             setAmount('');
         } catch (error) {
-            console.error('데이터 전송 중 오류 발생:', error);
-            setMessage('충전 중 오류가 발생했습니다. 다시 시도해주세요.');
+            console.error('요청 중 오류 발생:', error);
+            setMessage('요청 처리 중 오류가 발생했습니다. 다시 시도해주세요.');
         }
     };
 
     const handleAmountChange = (e) => {
         const value = e.target.value;
         if (/^\d*$/.test(value)) {
-            setAmount(value);
+            setAmount(value); // 숫자만 입력 가능하도록 처리
         }
     };
 
@@ -46,35 +59,21 @@ const PointRecharge = () => {
             <h2 className={styles.heading}>포인트 충전</h2>
             {message && <p className={styles.message}>{message}</p>}
             <form onSubmit={handleSubmit}>
-                <div className={styles.formGroup}>
-                    
-                    <label className={styles.label}>
-                        입금계좌 선택:
-                        <select
-                            value={accountNumber}
-                            onChange={(e) => setAccountNumber(e.target.value)}
-                            className={styles.select}
-                        >
-                            <option value="">계좌 선택</option>
-                            <option value="kakao">카카오뱅크</option>
-                            <option value="kookmin">국민은행</option>
-                            <option value="other">기타</option>
-                        </select>
-                    </label>
-                </div>
+                {/* 금액 입력 */}
                 <div className={styles.formGroup}>
                     <label className={styles.label}>
-                        입금액:
+                        금액:
                         <input
                             type="text"
                             value={amount}
                             onChange={handleAmountChange}
-                            placeholder="입금액 입력"
+                            placeholder="금액을 입력하세요"
                             required
                             className={styles.input}
                         />
                     </label>
                 </div>
+
                 <button type="submit" className={styles.button}>신청</button>
             </form>
         </div>

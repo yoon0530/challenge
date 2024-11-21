@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './CreateChallengePage.css'
 
 const CompletedChallenges = () => {
     const [completedChallenges, setCompletedChallenges] = useState([]);

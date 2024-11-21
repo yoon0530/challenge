@@ -1,3 +1,4 @@
+/* 전체 컨테이너 스타일 */
 .login {
     display: flex;
     flex-direction: column;
@@ -6,14 +7,16 @@
     padding: 100px 0px 130px;
 }
 
-.login .loginTitle {
+/* 로그인 제목 스타일 */
+.loginTitle {
     padding-bottom: 50px;
-    color: #333; /* $color-main 대체 */
+    color: #333;
     font-size: 30px;
     font-weight: 700;
 }
 
-.login .loginBox {
+/* 로그인 입력 박스 */
+.loginBox {
     width: 400px;
     height: 60px;
     margin-bottom: 15px;
@@ -22,11 +25,13 @@
     border-radius: 5px;
 }
 
-.login .loginBox::placeholder {
+/* 로그인 박스 placeholder 스타일 */
+.loginBox::placeholder {
     color: #dddddd;
 }
 
-.login .checkId {
+/* 아이디 저장 체크박스 */
+.checkId {
     display: flex;
     align-items: center;
     width: 400px;
@@ -36,48 +41,51 @@
     font-size: 13px;
 }
 
-.login .checkId .checkBtn {
+.checkId .checkBtn {
     width: 23px;
     height: 23px;
 }
 
-.login .checkId .checkIdSave {
-    color: #333; /* $color-main 대체 */
+.checkId .checkIdSave {
+    color: #333;
 }
 
-.login .btnLogin {
+/* 로그인 버튼 스타일 */
+.btnLogin {
     width: 400px;
     height: 60px;
     margin-top: 15px;
-    border: 1px solid #333; /* $color-main 대체 */
+    border: 1px solid #333;
     border-radius: 5px;
-    background-color: #333; /* $color-main 대체 */
+    background-color: #333;
     color: white;
     font-size: 14px;
     font-weight: 700;
     text-decoration: none;
 }
 
-.login .btnSignup {
+/* 회원가입 버튼 스타일 */
+.btnSignup {
     width: 400px;
     height: 60px;
     margin-top: 15px;
-    border: 1px solid #333; /* $color-main 대체 */
+    border: 1px solid #333;
     border-radius: 5px;
     background-color: white;
-    color: #333; /* $color-main 대체 */
+    color: #333;
     font-size: 14px;
 }
 
-.login .memberFind {
+/* 이메일/비밀번호 찾기 */
+.memberFind {
     margin-top: 20px;
     font-size: 14px;
 }
 
-.login .memberFind .colorWhite {
+.memberFind .colorWhite {
     color: #dddddd;
 }
 
-.login .memberFind .margin30 {
+.memberFind .margin30 {
     margin-right: 30px;
 }

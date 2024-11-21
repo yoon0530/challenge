@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AiOutlineCheckCircle } from 'react-icons/ai';
-import axios from 'axios'; // Import Axios
-import './LoginPage.css';
+import axios from 'axios';
+import styles from './LoginPage.module.css';
 
 const host = require('../api');
 
@@ -21,7 +21,7 @@ const LoginPage = ({ onLogin }) => {
     const gotoSignup = () => navigate('/signup');
 
     const loginClick = async (e) => {
-        e.preventDefault(); //페이지 새로고침 방지
+        e.preventDefault();
         try {
             const response = await axios.post(`${host}auth/signin`, loginInfo, {
                 headers: {
@@ -52,10 +52,10 @@ const LoginPage = ({ onLogin }) => {
     };
 
     return (
-        <form className="login">
-            <div className="loginTitle">로그인</div>
+        <form className={styles.login}>
+            <div className={styles.loginTitle}>로그인</div>
             <input
-                className="loginBox"
+                className={styles.loginBox}
                 type="text"
                 placeholder="이메일을 입력해주세요"
                 name="email"
@@ -64,7 +64,7 @@ const LoginPage = ({ onLogin }) => {
                 required
             />
             <input
-                className="loginBox"
+                className={styles.loginBox}
                 type="password"
                 placeholder="비밀번호를 입력해주세요"
                 name="password"
@@ -72,21 +72,21 @@ const LoginPage = ({ onLogin }) => {
                 onChange={handleInfo}
                 required
             />
-            <div className="checkId">
-                <AiOutlineCheckCircle className="checkBtn" />
-                <span className="checkIdSave">아이디 저장</span>
+            <div className={styles.checkId}>
+                <AiOutlineCheckCircle className={styles.checkBtn} />
+                <span className={styles.checkIdSave}>아이디 저장</span>
             </div>
-            <button className="btnLogin" onClick={loginClick}>
+            <button className={styles.btnLogin} onClick={loginClick}>
                 로그인
             </button>
-            <button type="button" className="btnSignup" onClick={gotoSignup}>
+            <button type="button" className={styles.btnSignup} onClick={gotoSignup}>
                 회원가입
             </button>
-            <div className="memberFind">
-                <Link to="/" className="colorWhite margin30">
+            <div className={styles.memberFind}>
+                <Link to="/" className={`${styles.colorWhite} ${styles.margin30}`}>
                     이메일 찾기
                 </Link>
-                <Link to="/" className="colorWhite">
+                <Link to="/" className={styles.colorWhite}>
                     비밀번호 찾기
                 </Link>
             </div>

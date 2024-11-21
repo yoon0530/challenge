@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './WritePost.css';
 import host from "../../api";
-import styles from "../MyPage/PointRecharge.module.css";
+import styles from "./WritePost.module.css";
 
 const WritePost = ({ userName }) => {
     const [title, setTitle] = useState('');
@@ -47,38 +46,41 @@ const WritePost = ({ userName }) => {
     };
 
     return (
-        <div className="write-post-container">
-            <h2>글 작성</h2>
-            <form onSubmit={handleSubmit}>
+        <div className={styles.writePostContainer}>
+            <h2 className={styles.title}>글 작성</h2>
+            <form onSubmit={handleSubmit} className={styles.r}>
                 <div>
-                    <label>제목</label>
+                    <label className={styles.formLabel}>제목</label>
                     <input
                         type="text"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
+                        className={styles.formInput}
                         required
                     />
                 </div>
                 <div>
-                    <label>내용</label>
+                    <label className={styles.formLabel}>내용</label>
                     <textarea
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
+                        className={styles.formInput}
                         required
                     />
                 </div>
                 <div>
-                    <label>사진 첨부</label>
+                    <label className={styles.formLabel}>사진 첨부</label>
                     <input
                         type="file"
                         accept="image/*"
                         onChange={handleImageChange}
+                        className={styles.formInput}
                     />
                 </div>
                 <select
                     value={rank}
                     onChange={(e) => setRank(e.target.value)}
-                    className={styles.select}
+                    className={styles.formInput}
                 >
                     <option value="">계좌 선택</option>
                     <option value="0">이거 골라</option>
@@ -86,12 +88,18 @@ const WritePost = ({ userName }) => {
                 <select
                     value={type}
                     onChange={(e) => setType(e.target.value)}
-                    className={styles.select}
+                    className={styles.formInput}
                 >
                     <option value="">계좌 선택</option>
                     <option value="1">이거 골라</option>
                 </select>
-                <button type="submit">작성 완료</button>
+                <button
+                    type="submit"
+                    disabled={!title || !content}
+                    className={styles.submitButton}
+                >
+                    작성 완료
+                </button>
             </form>
         </div>
     );

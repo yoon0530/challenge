@@ -1,0 +1,193 @@
+/* 게시물 상세 컨테이너 */
+.postDetailContainer {
+    width: 80%;
+    margin-bottom: 50px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: 100vh;
+}
+
+/* 게시물 헤더 */
+.postHeader {
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.pp {
+    min-width: 80px;
+    margin-right: 10px;
+    text-align: left;
+    color: #333;
+    font-weight: bold;
+}
+
+.postHeaderRow {
+    display: flex;
+    justify-content: flex-start;
+    padding: 15px 0px 14px 18px;
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.postTitle, .postNickName, .postDate {
+    color: #555;
+    font-weight: normal;
+    margin-right: 20px;
+}
+
+/* 게시물 내용 */
+.postContent {
+    font-size: 16px;
+    color: #333;
+    padding: 20px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.postImage {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+/* 버튼 그룹 */
+.buttonGroup {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 10px;
+    padding: 20px 0;
+}
+
+.editButton, .deleteButton{
+    padding: 8px 16px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+}
+
+.editButton {
+    background-color: #2d2b2b;
+    color: #fff;
+    border-radius: 6px;
+}
+
+.backButton {
+    padding: 8px 16px;
+    margin-top: 20px;
+    background-color: #333;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 80px;
+    height: 40px;
+}
+
+/* 댓글 섹션 */
+.commentSection {
+    margin-top: 20px;
+}
+
+.commentInputContainer {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.commentInput {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 16px;
+}
+
+.addCommentButton {
+    background-color: transparent;
+    border: none;
+    color: #007BFF;
+    cursor: pointer;
+    font-size: 16px;
+    width: 130px;
+    height: 40px;
+}
+
+/* 댓글 목록 */
+.commentList {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.commentItem {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #ddd;
+    padding: 20px 0;
+    font-family: Arial, sans-serif;
+}
+
+/* 댓글 삭제 버튼 */
+.deleteCommentButton, .likeButton, .likePostButton {
+    background-color: transparent;
+    border: 1px solid #ddd;
+    color: #333;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+
+.likeIcon {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+}
+
+/* 댓글 헤더 */
+.commentHeader {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.commentInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.commentNickName {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+.commentDate {
+    font-size: 12px;
+    color: #999;
+    margin-top: 2px;
+}
+
+/* 댓글 내용 */
+.commentBody {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #555;
+}
+
+/* 댓글 액션 */
+.commentActions {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+.flex {
+    display: flex;
+    flex-direction: row;
+}

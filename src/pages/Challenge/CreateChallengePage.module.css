@@ -1,0 +1,84 @@
+.createChallengePage {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+.title {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.r{
+    display: flex;
+    flex-direction: column;
+}
+
+.formLabel {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #555;
+}
+
+.formInput {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.formInput:focus {
+    outline: none;
+    border-color: #3f51b5;
+    box-shadow: 0 0 4px rgba(63, 81, 181, 0.5);
+}
+
+.formButton {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #3f51b5;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.formButton:disabled {
+    background-color: #b0bec5;
+    cursor: not-allowed;
+}
+
+.formButton:hover:not(:disabled) {
+    background-color: #303f9f;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .createChallengePage {
+        padding: 15px;
+    }
+
+    .title {
+        font-size: 24px;
+    }
+
+    .formButton {
+        font-size: 16px;
+        padding: 10px;
+    }
+}

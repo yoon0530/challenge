@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import styles from './EditChallenge.module.css';
 import host from "../../api";
 
 const EditChallenge = () => {
@@ -18,7 +19,7 @@ const EditChallenge = () => {
         const data = Object.fromEntries(formData.entries());
 
         try {
-            const response = await axios.put(`${host}challenge/`, {
+            await axios.put(`${host}challenge/`, {
                 ...data,
                 challengeId: challengeId,
             }, {
@@ -29,7 +30,6 @@ const EditChallenge = () => {
             });
             alert('도전이 성공적으로 수정되었습니다!');
             navigate('/challenge');
-            console.log(challengeId);
         } catch (error) {
             console.error('도전 수정 중 오류 발생:', error);
             alert('도전 수정에 실패했습니다.');
@@ -39,9 +39,9 @@ const EditChallenge = () => {
     };
 
     return (
-        <div className="create-challenge-page">
-            <h2 className="title">도전 수정</h2>
-            <form onSubmit={handleSubmit} className="create-challenge-form">
+        <div className={styles.createChallengePage}>
+            <h2 className={styles.title}>도전 수정</h2>
+            <form onSubmit={handleSubmit} className={styles.createChallengeForm}>
                 <label>
                     제목:
                     <input type="text" name="description" required />
@@ -66,7 +66,9 @@ const EditChallenge = () => {
                     총 인원:
                     <input type="number" name="maxHead" required />
                 </label>
-                <button type="submit" disabled={isSubmitting}>{isSubmitting ? "제출 중..." : "도전 수정"}</button>
+                <button type="submit" disabled={isSubmitting}>
+                    {isSubmitting ? "제출 중..." : "도전 수정"}
+                </button>
             </form>
         </div>
     );

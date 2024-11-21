@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './PostDetail.css';
+import styles from './PostDetail.module.css';
 import host from "../../api";
 
 const PostDetail = () => {
@@ -11,7 +11,7 @@ const PostDetail = () => {
         pid: '',
         title: '',
         content: '',
-        votes: '',
+        votes: 0,
         views: '',
         createdAt: '',
         updatedAt: '',
@@ -24,7 +24,6 @@ const PostDetail = () => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
 
     useEffect(() => {
-        console.log(storedUser);
         const fetchPost = async () => {
             try {
                 const response = await axios.get(`${host}community/${id}`, {
@@ -40,7 +39,7 @@ const PostDetail = () => {
 
         const fetchComments = async () => {
             try {
-                const response = await axios.get(`${host}comment/${id}`,{
+                const response = await axios.get(`${host}comment/${id}`, {
                     headers: {
                         'Content-Type': 'application/json',
                     }
@@ -63,7 +62,70 @@ const PostDetail = () => {
         fetchComments();
     }, [id]);
 
-    //댓글 추가 기능
+    const handlePostLike = async () => {
+        try {
+            const response = await axios.put(
+                `${host}community/vote`,
+                { postId: id },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'auth-token': token,
+                    },
+                }
+        );
+            if (response.status === 200) {
+                // 최신 추천 수를 다시 가져오기
+                const updatedPost = await axios.get(`${host}community/${id}`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+                setPost(prevPost => ({
+                    ...prevPost,
+                    votes: updatedPost.data.result[0].votes,
+                }));
+            }
+        } catch (error) {
+            console.error("Error liking post:", error);
+            alert("추천에 실패했습니다. 다시 시도해주세요.");
+        }
+    };
+
+    const handleCommentLike = async (commentId) => {
+        try {
+            const response = await axios.put(
+                `${host}comment/vote`,
+                { commentId },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'auth-token': token,
+                    },
+                }
+        );
+            if (response.status === 200) {
+                // 최신 댓글 추천 수 업데이트
+                const updatedComments = await axios.get(`${host}comment/${id}`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+                const mappedComments = updatedComments.data.result.map(res => ({
+                    commentId: res.commentId,
+                    nickName: res.nickName,
+                    content: res.content,
+                    createdAt: res.createdAt,
+                    votes: res.votes,
+                    userId: res.userId,
+                }));
+                setComments(mappedComments);
+            }
+        } catch (error) {
+            console.error("Error toggling like:", error);
+        }
+    };
+
     const handleAddComment = async () => {
         if (!newComment.trim()) return alert("댓글 내용을 입력해주세요.");
 
@@ -79,30 +141,28 @@ const PostDetail = () => {
                         'auth-token': token,
                     }
                 }
-            );
+        );
 
-            setComments([ ...comments,response.data]);
+            setComments([ ...comments, response.data ]);
             setNewComment('');
-            window.location.reload()
+            window.location.reload();
         } catch (error) {
             alert("댓글 추가에 실패했습니다.");
         }
     };
 
-    //댓글 삭제 기능
     const handleDeleteComment = async (commentId) => {
         if (window.confirm("정말로 이 댓글을 삭제하시겠습니까?")) {
             try {
                 await axios.delete(`${host}comment/${commentId}`, {
                     headers: {
                         'Content-Type': 'application/json',
-                        'auth-token': token,
+                            'auth-token': token,
                     }
                 });
                 setComments(comments.filter(comment => comment.commentId !== commentId));
                 alert("댓글이 삭제되었습니다.");
             } catch (error) {
-                console.log(comments.commentId);
                 console.error("Error deleting comment:", error);
                 alert("댓글 삭제에 실패했습니다.");
             }
@@ -119,7 +179,7 @@ const PostDetail = () => {
                 await axios.delete(`${host}community/${id}`, {
                     headers: {
                         'Content-Type': 'application/json',
-                        'auth-token': token,
+                            'auth-token': token,
                     }
                 });
                 alert("글이 삭제되었습니다.");
@@ -138,70 +198,93 @@ const PostDetail = () => {
     if (!post.title) return <p>Loading...</p>;
 
     return (
-        <div className="post-detail-container">
-            <div className="post-header">
-                <div className="post-header-row">
-                    <span className="pp">제목</span>
-                    <span className="post-title">{post.title}</span>
+        <div className={styles.postDetailContainer}>
+            <div className={styles.postHeader}>
+                <div className={styles.postHeaderRow}>
+                    <span className={styles.pp}>제목</span>
+                    <span className={styles.postTitle}>{post.title}</span>
                 </div>
-                <div className="post-header-row">
-                    <span className="pp">작성자</span>
-                    <span className="post-ninkName">{post.nickName}</span>
+                <div className={styles.postHeaderRow}>
+                    <span className={styles.pp}>작성자</span>
+                    <span className={styles.postNickName}>{post.nickName}</span>
                 </div>
-                <div className="post-header-row">
-                    <span className="pp">작성일</span>
-                    <span className="post-date">{post.createdAt}</span>
+                <div className={styles.postHeaderRow}>
+                    <span className={styles.pp}>작성일</span>
+                    <span className={styles.postDate}>{post.createdAt}</span>
                 </div>
             </div>
 
-            <div className="post-content">
-                {post.imageDir && post.imageDir !== "0" && ( // post.imageDir이 0이 아닌 경우에만 렌더링
-                    <img
-                        src={post.imageDir}
-                        alt="Post"
-                        className="post-image"
-                    />
+            <div className={styles.postLikeContainer}>
+                <button onClick={handlePostLike} className={styles.likePostButton}>
+                    추천 ({post.votes})
+                </button>
+            </div>
+
+            <div className={styles.postContent}>
+                {post.imageDir && post.imageDir !== "0" && (
+                    <img src={post.imageDir} alt="Post" className={styles.postImage}/>
                 )}
                 <p>{post.content}</p>
             </div>
 
-
-            <div className="button-group">
+            <div className={styles.buttonGroup}>
                 <button onClick={handleEdit}>수정</button>
                 <button onClick={handleDelete}>삭제</button>
             </div>
 
-
-            <div className="comment-section">
+            <div className={styles.commentSection}>
                 <h3>댓글 {comments.length}개</h3>
-                <div className="comment-input-container">
+                <div className={styles.commentInputContainer}>
                     <input
                         type="text"
                         value={newComment}
                         onChange={(e) => setNewComment(e.target.value)}
                         placeholder="댓글 입력하기"
-                        className="comment-input"
+                        className={styles.commentInput}
                     />
-                    <button onClick={handleAddComment} className="add-comment-button">댓글 추가</button>
+                    <button onClick={handleAddComment} className={styles.addCommentButton}>
+                        댓글 추가
+                    </button>
                 </div>
             </div>
 
-            <ul className="comment-list">
-                {comments.map(comment => (
-                    <li key={comment.commentId} className="comment-item">
-                        <p>작성자: {comment.nickName}</p>
-                        <p>{comment.content}</p>
-                        <p>추천수: {comment.votes}</p>
-                        <p>작성일: {comment.createdAt}</p>
-                        <button onClick={() => handleDeleteComment(comment.commentId)} className="delete-comment-button">
-                            댓글 삭제
-                        </button>
+            <ul className={styles.commentList}>
+                {comments.map((comment) => (
+                    <li key={comment.commentId} className={styles.commentItem}>
+                        <div className={styles.commentHeader}>
+                            <div className={styles.commentInfo}>
+                                <span className={styles.commentNickName}>{comment.nickName}</span>
+                                <span className={styles.commentDate}>{comment.createdAt}</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div className={styles.commentBody}>
+                                <p className={styles.commentContent}>{comment.content}</p>
+                            </div>
+                            <div className={styles.commentActions}>
+                                <button
+                                    className={styles.likeButton}
+                                    onClick={() => handleCommentLike(comment.commentId)}
+                                >
+                                    추천 ({comment.votes})
+                                </button>
+                                {storedUser === comment.userId && (
+                                    <button
+                                        onClick={() => handleDeleteComment(comment.commentId)}
+                                        className={styles.deleteCommentButton}
+                                    >
+                                        삭제
+                                    </button>
+                                )}
+                            </div>
+                        </div>
                     </li>
                 ))}
             </ul>
 
-            <button onClick={handleBack} className="back-button">목록</button>
+            <button onClick={handleBack} className={styles.backButton}>목록</button>
         </div>
+
     );
 };
 

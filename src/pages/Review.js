@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./Review.css";
+import styles from "./Review.module.css";
 import host from "../api";
 
 const Review = ({ challengeId }) => {
     const [reviews, setReviews] = useState([]);
-    const [newReview, setNewReview] = useState('');
+    const [newReview, setNewReview] = useState("");
     const token = localStorage.getItem("auth-token");
-    const storedUser = JSON.parse(localStorage.getItem('user'));
+    const storedUser = JSON.parse(localStorage.getItem("user"));
 
     // 리뷰 목록 가져오기
     useEffect(() => {
@@ -19,7 +19,7 @@ const Review = ({ challengeId }) => {
                         "auth-token": token,
                     },
                 });
-                const mappedReviews = response.data.result.map(res => ({
+                const mappedReviews = response.data.result.map((res) => ({
                     id: res.id,
                     nickName: res.nickName,
                     content: res.content,
@@ -57,10 +57,9 @@ const Review = ({ challengeId }) => {
                 }
             );
 
-            setReviews((prev) => [...prev, response.data]); // 새로운 리뷰 추가
-            setNewReview(''); // 입력창 초기화
+            setReviews((prev) => [...prev, response.data]);
+            setNewReview(""); // 입력창 초기화
             alert("리뷰가 작성되었습니다.");
-            window.location.reload();
         } catch (error) {
             console.error("Error adding review:", error);
             alert("리뷰 추가에 실패했습니다.");
@@ -79,7 +78,7 @@ const Review = ({ challengeId }) => {
                 },
             });
 
-            setReviews((prev) => prev.filter((review) => review.id !== reviewId)); // 삭제된 리뷰 제거
+            setReviews((prev) => prev.filter((review) => review.id !== reviewId));
             alert("리뷰가 삭제되었습니다.");
         } catch (error) {
             console.error("Error deleting review:", error);
@@ -98,10 +97,7 @@ const Review = ({ challengeId }) => {
         try {
             await axios.put(
                 `${host}review/`,
-                {
-                    content: updatedContent,
-                    reviewId: reviewId,
-                },
+                { content: updatedContent, reviewId },
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -123,11 +119,11 @@ const Review = ({ challengeId }) => {
     };
 
     return (
-        <div className="review-container">
+        <div className={styles.reviewContainer}>
             <h2>후기</h2>
 
             {/* 리뷰 작성 섹션 */}
-            <div className="review-form">
+            <div className={styles.reviewForm}>
                 <textarea
                     placeholder="리뷰를 작성하세요..."
                     value={newReview}
@@ -137,20 +133,20 @@ const Review = ({ challengeId }) => {
             </div>
 
             {/* 리뷰 리스트 */}
-            <ul className="review-list">
+            <ul className={styles.reviewList}>
                 {reviews.map((review) => (
-                    <li key={review.id} className="review-item">
-                        <div className="review-info">
-                            <span className="review-nickname">
+                    <li key={review.id} className={styles.reviewItem}>
+                        <div className={styles.reviewInfo}>
+                            <span className={styles.reviewNickname}>
                                 <strong>{review.nickName}</strong>
                             </span>
-                            <span className="review-date">{formatDate(review.createdAt)}</span>
+                            <span className={styles.reviewDate}>{formatDate(review.createdAt)}</span>
                         </div>
-                        <p className="review-content">{review.content}</p>
+                        <p className={styles.reviewContent}>{review.content}</p>
 
                         {/* 로그인한 사용자의 리뷰에만 수정/삭제 버튼 표시 */}
                         {storedUser === review.userId && (
-                            <div className="review-actions">
+                            <div className={styles.reviewActions}>
                                 <button onClick={() => handleUpdateReview(review.id)}>수정</button>
                                 <button onClick={() => handleDeleteReview(review.id)}>삭제</button>
                             </div>

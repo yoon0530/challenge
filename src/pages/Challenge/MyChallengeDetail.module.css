@@ -1,0 +1,117 @@
+/* 전체 컨테이너 스타일 */
+.challengeDetail {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    color: #333;
+    font-family: Arial, sans-serif;
+}
+
+/* 제목 스타일 */
+.title {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #3f51b5;
+    text-align: center;
+}
+
+/* 텍스트 스타일 */
+.text {
+    font-size: 1rem;
+    margin: 8px 0;
+    line-height: 1.5;
+}
+
+/* 강조 텍스트 */
+.textStrong {
+    color: #333;
+    font-weight: bold;
+}
+
+/* 버튼 스타일 */
+.enrollButton {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 10px 5px 0 0;
+    display: inline-block;
+    width: calc(50% - 5px); /* 버튼 간격 조정 */
+}
+
+/* 신청 버튼 색상 */
+.enrollButton {
+    background-color: #93abbd;
+    color: white;
+}
+
+.enrollButton:disabled {
+    background-color: #a5d6a7;
+    cursor: not-allowed;
+}
+
+/* 버튼 호버 스타일 */
+.enrollButton:hover:not(:disabled) {
+    background-color: #388e3c;
+}
+
+/* 반응형 처리 */
+@media (max-width: 600px) {
+    .challengeDetail {
+        padding: 15px;
+    }
+
+    .enrollButton {
+        width: 100%;
+        margin: 10px 0;
+    }
+}
+
+/* 인증 폼 스타일 */
+.certificationForm {
+    width: 50%;
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.certificationFormTitle {
+    margin-bottom: 15px;
+}
+
+.certificationFormLabel {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.certificationFormInput,
+.certificationFormTextarea {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.certificationFormButton {
+    margin-right: 10px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+}
+
+.certificationFormCancelButton {
+    background-color: #6c757d;
+}

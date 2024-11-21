@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import './Exchange.css';
+import styles from "./Exchange.module.css";
 import axios from "axios";
 import host from "../../api";
 
@@ -7,7 +7,6 @@ const Exchange = () => {
     const [withdrawals, setWithdrawals] = useState([]);
     const token = localStorage.getItem("auth-token");
 
-    // 백엔드에서 환전 대기 리스트 가져오기
     useEffect(() => {
         const fetchWithdrawals = async () => {
             try {
@@ -42,13 +41,12 @@ const Exchange = () => {
                 }
             );
             alert(`환전 요청 ${id}가 승인되었습니다.`);
-            setWithdrawals(withdrawals.filter((withdrawal) => withdrawal.id !== id)); // 승인된 항목 제거
+            setWithdrawals((prev) => prev.filter((withdrawal) => withdrawal.id !== id));
         } catch (error) {
             console.error("환전 요청 승인 중 오류 발생:", error);
         }
     };
 
-    // 환전 거부
     const handleReject = async (id) => {
         try {
             await axios.put(
@@ -65,18 +63,18 @@ const Exchange = () => {
                 }
             );
             alert(`환전 요청 ${id}가 거부되었습니다.`);
-            setWithdrawals(withdrawals.filter((withdrawal) => withdrawal.id !== id)); // 거부된 항목 제거
+            setWithdrawals((prev) => prev.filter((withdrawal) => withdrawal.id !== id));
         } catch (error) {
             console.error("환전 요청 거부 중 오류 발생:", error);
         }
     };
 
     return (
-        <div className="admin-section">
+        <div className={styles.adminSection}>
             <h2>환전 대기 리스트</h2>
             <ul>
                 {withdrawals.map((withdrawal) => (
-                    <li key={withdrawal.id} className="withdrawal-item">
+                    <li key={withdrawal.id} className={styles.withdrawalItem}>
                         <div>
                             <p>
                                 <strong>사용자:</strong> {withdrawal.nickName}
@@ -88,15 +86,15 @@ const Exchange = () => {
                                 <strong>환전 포인트:</strong> {withdrawal.amount} P
                             </p>
                         </div>
-                        <div className="action-buttons">
+                        <div className={styles.actionButtons}>
                             <button
-                                className="approve-button"
+                                className={styles.approveButton}
                                 onClick={() => handleApprove(withdrawal.id)}
                             >
                                 승인
                             </button>
                             <button
-                                className="reject-button"
+                                className={styles.rejectButton}
                                 onClick={() => handleReject(withdrawal.id)}
                             >
                                 거부

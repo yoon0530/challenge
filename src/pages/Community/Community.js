@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import {useNavigate, useParams} from 'react-router-dom';
-import './Community.css';
+import { useNavigate } from 'react-router-dom';
+import styles from './Community.module.css';
 import axios from 'axios';
 import host from "../../api";
 
@@ -39,50 +39,65 @@ const Community = () => {
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     return (
-        <div className="board-container">
-            <h1>자유게시판</h1>
-            <table className="post-table">
+        <div className={styles.boardContainer}>
+            <h1
+                style={{
+                    fontSize: "24px",
+                    fontWeight: "bold",
+                    marginBottom: "20px",
+                }}
+            >
+                자유게시판
+            </h1>
+            <table className={styles.postTable}>
                 <thead>
-                    <tr>
-                        <th>번호</th>
-                        <th>제목</th>
-                        <th className="createdAt">작성일</th>
-                        <th className="author">작성자</th>
-                    </tr>
+                <tr>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th className={styles.createdAt}>작성일</th>
+                    <th className={styles.author}>작성자</th>
+                </tr>
                 </thead>
                 <tbody>
-                    {posts.length > 0 ? (
-                        posts.map((post, index) => (
-                            <tr 
-                                key={post.id}
-                                    onClick={() => navigate(`/community/${post.id}`)}
-                                className="post-row"
-                            >
-                                <td>{(currentPage - 1) * postsPerPage + index + 1}</td>
-                                <td>{post.title}</td>
-                                <td className="createdAt">{post.createdAt}</td>
-                                <td className="author">{post.author}</td>
-                            </tr>
-                        ))
-                    ) : (
-                        <tr>
-                            <td colSpan="3" className="no-posts-message">현재 게시된 글이 없습니다.</td>
+                {posts.length > 0 ? (
+                    posts.map((post, index) => (
+                        <tr
+                            key={post.id}
+                            onClick={() => navigate(`/community/${post.id}`)}
+                            className={styles.postRow}
+                        >
+                            <td>{(currentPage - 1) * postsPerPage + index + 1}</td>
+                            <td>{post.title}</td>
+                            <td className={styles.createdAt}>{post.createdAt}</td>
+                            <td className={styles.author}>{post.author}</td>
                         </tr>
-                    )}
+                    ))
+                ) : (
+                    <tr>
+                        <td colSpan="4" className={styles.noPostsMessage}>
+                            현재 게시된 글이 없습니다.
+                        </td>
+                    </tr>
+                )}
                 </tbody>
             </table>
-            <div className="pagination">
+            <div className={styles.pagination}>
                 {[...Array(totalPages).keys()].map(num => (
-                    <button 
-                        key={num} 
-                        onClick={() => paginate(num + 1)} 
-                        className={currentPage === num + 1 ? 'active' : ''}
+                    <button
+                        key={num}
+                        onClick={() => paginate(num + 1)}
+                        className={currentPage === num + 1 ? styles.active : ''}
                     >
                         {num + 1}
                     </button>
                 ))}
             </div>
-            <button className="write-button" onClick={() => navigate('/write')}>글 작성</button>
+            <button
+                className={styles.writeButton}
+                onClick={() => navigate('/write')}
+            >
+                글 작성
+            </button>
         </div>
     );
 };
