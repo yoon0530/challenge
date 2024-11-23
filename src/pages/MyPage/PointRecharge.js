@@ -58,7 +58,7 @@ const PointRecharge = () => {
         <div className={styles.container}>
             <h2 className={styles.heading}>포인트 충전</h2>
             {message && <p className={styles.message}>{message}</p>}
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className={styles.r}>
                 {/* 금액 입력 */}
                 <div className={styles.formGroup}>
                     <label className={styles.label}>

@@ -66,3 +66,8 @@
 .button:hover {
     background-color: #0056b3;
 }
+
+.r {
+    display: flex;
+    flex-direction: column;
+}

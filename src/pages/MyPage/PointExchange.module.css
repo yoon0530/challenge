@@ -67,3 +67,8 @@
     color: #666;
     margin-top: 10px;
 }
+
+.r {
+    display: flex;
+    flex-direction: column;
+}
