@@ -119,3 +119,8 @@
 .editButton:hover {
   background-color: #45a049;
 }
+
+.r {
+  display: flex;
+  flex-direction: column;
+}

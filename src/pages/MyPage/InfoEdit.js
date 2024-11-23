@@ -78,7 +78,7 @@ const InfoEdit = () => {
   return (
       <div className={styles.infoEditContainer}>
         <h2>정보 수정</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className={styles.r}>
           <div className={styles.profileImageContainer}>
             <label htmlFor="image-upload">
               {previewImage ? (

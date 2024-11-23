@@ -10,6 +10,11 @@
     font-family: Arial, sans-serif;
 }
 
+.r {
+    display: flex;
+    flex-direction: column;
+}
+
 /* 제목 스타일 */
 .title {
     font-size: 1.8rem;

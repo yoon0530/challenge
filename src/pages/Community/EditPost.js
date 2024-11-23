@@ -69,7 +69,7 @@ const EditPost = () => {
     return (
         <div className={styles.editPostContainer}>
             <h2 className={styles.title}>글 수정</h2>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className={styles.r}>
                 <div className={styles.formField}>
                     <label className={styles.formLabel}>제목</label>
                     <input

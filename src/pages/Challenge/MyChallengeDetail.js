@@ -102,7 +102,7 @@ const MyChallengeDetail = () => {
             {showCertificationForm && (
                 <div className={styles.certificationForm}>
                     <h3 className={styles.certificationFormTitle}>인증하기</h3>
-                    <form onSubmit={handleCertificationSubmit}>
+                    <form onSubmit={handleCertificationSubmit} className={styles.r}>
                         <div>
                             <label htmlFor="photo" className={styles.certificationFormLabel}>사진 업로드:</label>
                             <input

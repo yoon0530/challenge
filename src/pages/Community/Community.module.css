@@ -23,7 +23,6 @@
 
 .postTable th {
     font-weight: bold;
-    text-align: left;
 }
 
 .postTable th:first-child, .postTable td:first-child {
