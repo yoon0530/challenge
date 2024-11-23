@@ -39,7 +39,7 @@ const AdminAuth = () => {
                 `${host}admin/challengeauth`,
                 {
                     challengeAuthId: id,
-                    isAccepted: 1,
+                    isAccept: 1,
                 },
                 {
                     headers: {
@@ -61,7 +61,7 @@ const AdminAuth = () => {
                 `${host}admin/challengeauth`,
                 {
                     challengeAuthId: id,
-                    isAccepted: 2,
+                    isAccept: 2,
                 },
                 {
                     headers: {
