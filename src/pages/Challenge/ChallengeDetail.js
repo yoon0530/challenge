@@ -101,7 +101,11 @@ const ChallengeDetail = () => {
         <>
             <div className={styles.challengeDetail}>
                 <h2>{challenge.description}</h2>
-                <p><strong>참가비:</strong> {challenge.participationFee}</p>
+                <p><strong>{challenge.status === 0
+                    ? "참여비"
+                    : "보상금"}</strong> {challenge.status === 0
+                    ? `${challenge.participationFee ? challenge.participationFee.toLocaleString() : "0"}원`
+                    : `${challenge.reward ? challenge.reward.toLocaleString() : "보증금 없음"}원`}</p>
                 <p><strong>참여 인원:</strong> {challenge.maxHead}</p>
                 <p><strong>진행 상태:</strong> {status}</p>
                 <p><strong>도전 기간:</strong> {challenge.startDate} - {challenge.endDate}</p>
