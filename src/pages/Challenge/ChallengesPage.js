@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import styles from './ChallengesPage.module.css'; // CSS 모듈 불러오기
+import styles from './ChallengesPage.module.css';
 import host from "../../api";
 
 const ChallengesPage = () => {
@@ -60,7 +60,8 @@ const ChallengesPage = () => {
                         className={styles.challengeCard}
                         onClick={() => handleCardClick(challenge.challengeId)}
                     >
-                        <div className={styles.challengeBadge}>
+                        <div
+                            className={`${styles.challengeBadge} ${challenge.status ? styles.inProgress : styles.recruiting}`}>
                             <span>{challenge.status ? "진행 중" : "모집 중"}</span>
                         </div>
                         <h3 className={styles.challengeTitle}>
@@ -76,11 +77,13 @@ const ChallengesPage = () => {
                             <p>참여 인원: {challenge.userCount} / {challenge.maxHead}</p>
                         </div>
                         <div className={styles.challengeRewards}>
-                            <p>보증금</p>
+                            <p>{challenge.status === 0
+                                ? "참여비"
+                                : "보상금"}</p>
                             <span>
-                                {challenge.reward
-                                    ? `${challenge.reward.toLocaleString()}원`
-                                    : "보증금 없음"}
+                                {challenge.status === 0
+                                    ? `${challenge.participationFee ? challenge.participationFee.toLocaleString() : "0"}원`
+                                    : `${challenge.reward ? challenge.reward.toLocaleString() : "보증금 없음"}원`}
                             </span>
                         </div>
                     </div>

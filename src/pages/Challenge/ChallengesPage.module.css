@@ -86,3 +86,18 @@
 .challengeRewards span {
     font-weight: bold;
 }
+
+.challengeBadge {
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}
+
+.recruiting {
+    background-color: green;
+}
+
+.inProgress {
+    background-color: red;
+}
